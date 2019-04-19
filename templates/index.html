@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <title>Salary Prediction Model</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+    $('#predictButton').click(function() {
+        var data = {
+            'yearsOfExperience': $('#yearsOfExperience').val(),
+            'location': $('#location').val(),
+            'sector': $('#sector').val(),
+            'company_size': $('#company_size').val(),
+        }
+        $.ajax({
+            url: '/predict',
+            dataType: "json",
+            contentType : "application/json",
+            data: data,
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+</script>
+  </head>
+  <body style="min-height: 622.4px; background-image: url('static/back.png'); background-size:cover; background-repeat: no-repeat; background-position: center center; ">
+    <h1 style="width:100%; text-align: center; color: white; margin-top:200px;">KNOW YOUR MARKET VALUE!</h1>
+<form id="myForm" action="/predict" method="post">
+  <div style="  margin-left: 42%;background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 40px; overflow: hidden; width: 240px;border-radius: 5px; background-color: #3b8ec2; color: #fff; margin-bottom:10px;">
+
+    <select style="margin: 0 auto; background: transparent; border: none; font-size: 14px;height: 40px;padding: 5px; width: 268px; color: #fff; padding-bottom:10px;"  id="yearsOfExperience" name="yearsOfExperience">
+      <option style="color:black;" value="" disabled selected>Years of experience</option>
+      <option style="color:black; " value="0">1 to 3</option>
+      <option style="color:black; " value="1">4 to 6</option>
+      <option style="color:black; " value="2">7 to 10</option>
+  
+</select>
+</div>
+<div style="    margin-left: 42%;background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 40px; overflow: hidden; width: 240px;border-radius: 5px; background-color: #3b8ec2; color: #fff; margin-bottom:10px;">
+<select style="margin: 0 auto; background: transparent; border: none; font-size: 14px;height: 40px;padding: 5px; width: 268px; color: #fff; padding-bottom:10px;" id="location" name="location">
+  <option style="color:black;"  value="" disabled selected>Location</option>
+  <option style="color:black; " value="0">Austin</option>
+  <option style="color:black; " value="1">Berkley</option>
+  <option style="color:black; " value="2">Boston</option>
+  <option style="color:black; " value="3">Chicago</option>
+  <option style="color:black; " value="4">Cupertino</option>
+  <option style="color:black; " value="5">Houston</option>
+  <option style="color:black; " value="6">Los Angeles</option>
+  <option style="color:black; " value="7">Mountain View</option>
+  <option style="color:black; " value="8">New York</option>
+  <option style="color:black; " value="9">Orlando</option>
+  <option style="color:black; " value="10">San Francisco</option>
+  <option style="color:black; " value="11">San Jose</option>
+  <option style="color:black; " value="12">Seattle</option>
+  <option style="color:black; " value="13">Atlanta</option>
+  <option style="color:black; " value="14">Cleveland</option>
+  <option style="color:black; " value="15">Menlo Park</option>
+  <option style="color:black; " value="16">Minneapolis</option>
+  <option style="color:black; " value="17">Oakland</option>
+  <option style="color:black; " value="18">Palo Alto</option>
+  <option style="color:black; " value="19">Redwood City</option>
+  <option style="color:black; " value="20">Sacramento</option>
+  <option style="color:black; " value="21">San Diego</option>
+  <option style="color:black; " value="22">San Mateo</option>
+  <option style="color:black; " value="23">Santa Clara</option>
+  <option style="color:black; " value="24">Sunnyvale</option>
+  <option style="color:black; " value="25">Washington</option>
+</select>
+</div>
+<div style="    margin-left: 42%;background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 40px; overflow: hidden; width: 240px;border-radius: 5px; background-color: #3b8ec2; color: #fff; margin-bottom:10px;">
+<select style="margin: 0 auto; background: transparent; border: none; font-size: 14px;height: 40px;padding: 5px; width: 268px; color: #fff; padding-bottom:10px;" id="sector" name="sector">
+  <option style="color:black;"  value="" disabled selected>Sector</option>
+  <option style="color:black;" value="0">Oil and Energy</option>
+  <option style="color:black;" value="1">Accounting</option>
+  <option style="color:black;" value="2">Banking</option>
+  <option style="color:black;" value="3">Civil</option>
+  <option style="color:black;" value="4">Consulting</option>
+  <option style="color:black;" value="5">Education</option>
+  <option style="color:black;" value="6">Finance</option>
+  <option style="color:black;" value="7">Government</option>
+  <option style="color:black;" value="8">Health</option>
+  <option style="color:black;" value="9">Law</option>
+  <option style="color:black;" value="10">Manufacturing</option>
+  <option style="color:black;" value="11">Marketing</option>
+  <option style="color:black;" value="12">Non-Profit</option>
+  <option style="color:black;" value="13">Software/IT</option>
+  <option style="color:black;" value="14">Staffing</option>
+  <option style="color:black;" value="15">Real Estate</option>
+  <option style="color:black;" value="16">Retail</option>
+</select>
+</div>
+<div style="    margin-left: 42%;background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; height: 40px; overflow: hidden; width: 240px;border-radius: 5px; background-color: #3b8ec2; color: #fff; margin-bottom:10px;">
+<select style="margin: 0 auto; background: transparent; border: none; font-size: 14px;height: 40px;padding: 5px; width: 268px; color: #fff; padding-bottom:10px;" id="company_size" name="company_size">
+  <option style="color:black;"  value="" disabled selected>Company size</option>
+  <option style="color:black;" value="0">Small-size</option>
+  <option style="color:black;" value="1">Medium-size</option>
+  <option style="color:black;" value="2">MNC</option>
+</select>
+</div>
+
+     <input style="margin-top: 10px;height:40px;background-color: #b9d7ea; color: black; border-radius: 5px; width:209px; margin-left: 43%; border-color: #b9d7ea; " id="predictButton" type="submit" value="PREDICT"> 
+</form>
+  </body>
+</html>
