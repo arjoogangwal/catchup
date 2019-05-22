@@ -1,14 +1,77 @@
+<div class="oj-hybrid-padding module-content-container flex-container">
+    <h1>Buy/Sell</h1>
+    <div id="accomodationContentContainer" class="flex-bar">
 
-<div class="oj-hybrid-padding">
-  <h1>Dashboard Content Area</h1>
-   <div id="sampleDemo" style="" class="demo-padding demo-container">
-      <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
-        
-        <div id='buttons-container'>
-            <oj-button id='button1' on-oj-action='[[buttonClick]]'>Button 1</oj-button>
+        <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+            <div class="oj-flex-bar">
+                <oj-button on-oj-action='[[postButtonClick]]' class='oj-button-sm oj-flex-bar-end' style="width: 200px; max-width: 200px;" chroming='full'>
+                    Post
+                </oj-button>
+            </div>
+
+            <oj-dialog style="display:none; width:40vw; height:60vh;" id="modalDialog1" dialog-title="Post a new listing"
+                       position='{"my": {"vertical":"center", "horizontal": "center"},
+                                "at": {"vertical": "center", "horizontal": "center"},
+                                "offset" : {"x" : "20"},
+                                "of": "window"}'>
+                <div slot="body">
+                    <div class='oj-flex-bar'>
+                        <div class='oj-flex-bar-start'>
+                            <oj-label id="mainlabelid"
+                                      class="oj-label-inline">Post Type</oj-label>
+                        </div>
+                        <div class='oj-flex-bar-middle'>
+                            <!-- You need to set the labelled-by attribute to make
+                            this accessible. -->
+                            <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row">
+                                <oj-option id="buy" value="rock">Buy</oj-option>
+                                <oj-option id="sell" value="boarding">Sell</oj-option>
+                            </oj-radioset>
+                        </div>
+                    </div>
+                    <div>
+                        <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Title" value="{{postTitle}}">
+                        </oj-text-area>
+                    </div>
+                    <div>
+                        <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{postDescription}}">
+                        </oj-text-area>
+                    </div>
+                    <div id="postForm" style="width: 1px; min-width: 100%;">
+                        <div class="oj-form" >
+
+                            <oj-input-text id="location" placeholder="Address" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
+                            <oj-input-text id="city" placeholder="City" value="{{postCity}}" style="max-width:49%"></oj-input-text>
+                            <oj-input-text id="state" placeholder="State" value="{{postState}}" style="max-width:49%"></oj-input-text>
+                            <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
+
+
+                            <oj-label for="price" class="oj-label-inline">$</oj-label>
+                            <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
+                            <oj-select-one id="conditionSelect" required="true"
+                                           placeholder="Condition"
+                                           style="max-width:20em">
+                                <oj-option value="FAIR">Fair</oj-option>
+                                <oj-option value="NEW">New</oj-option>
+                                <oj-option value="EXCELLENT">Excellent</oj-option>
+                                <oj-option value="GOOD">Good</oj-option>
+                                <oj-option value="LIKE NEW">Like New</oj-option>
+                            </oj-select-one>
+                        </div>
+                    </div>
+                </div>
+                <div slot="footer">
+                    <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                    </oj-button>
+                    <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
+                    </oj-button>
+                </div>
+            </oj-dialog>
+
+            <div id="listviewContainer" class="demo-container">
+                <eventsdrilldownlist class="flex-column flex-column overflow-hidden grow" ></eventsdrilldownlist>
+
+            </div>
         </div>
-
-        
-      </div>
     </div>
 </div>

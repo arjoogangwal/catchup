@@ -1,17 +1,7 @@
-/*
-    Document   : override
-    Created on : <date>
-    Author     : <author>
-    Description:
-        This is where any of your application specific styles should be included
-*/
 
-/-------------------------------------------------------------------------------\
-     #LAYOUT FRAMEWORK
-\-------------------------------------------------------------------------------/
 
-.flex-container { /* Deprecated */
-    display: flex;
+.flex-container {
+    /*display: flex;*/
 	box-sizing: border-box;
 }
 
@@ -283,7 +273,33 @@
 
 .accomodation-dashboard-container{
 	width: 50%;
+    max-width: 60%;
+}
 
+.oj-fwk-icon-status-error, .oj-message-status-icon.oj-message-error-icon, .oj-progressstatus-error-icon {
+    background-image: url(images/msgsIcon.png);
+    background-size: 100% 100%;
+    background-position: 0px 0px;
+    width: 45px;
+    height: 45px;
+    margin-top: 50px;
+}
+
+html:not([dir="rtl"]) .oj-messages-general .oj-message-body, html:not([dir="rtl"]) .oj-messages-inline .oj-message-body {
+    padding: 0px 20px 20px 75px;
+}
+
+
+.demo-page2-hide{
+    display: none;
+}
+
+.demo-page1-hide{
+    display: none;
+}
+
+.display-none-toggle{
+    display: none;
 }
 
 

@@ -49,18 +49,55 @@
                 <oj-menu-button id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="half">
                   <span><oj-bind-text value="[[userLogin]]"></oj-bind-text></span>
                   <span slot="endIcon" :class="[[{'oj-icon demo-appheader-avatar': smScreen(), 'oj-component-icon oj-button-menu-dropdown-icon': !smScreen()}]]"></span>
-                  <oj-menu id="menu1" slot="menu" style="display:none">
+                  <oj-menu id="menu1" slot="menu" style="display:none" on-oj-action="[[menuItemAction]]">
                     <oj-option id="prof" value="pref">Profile</oj-option>
                     <oj-option id="posts" value="help">Posts</oj-option>
+                    <oj-option id="messages" value="msg">Messages</oj-option>
                     <oj-option id="out" value="out">Sign Out</oj-option>
                   </oj-menu>
                 </oj-menu-button>
+
+                <!-- Messages container dialog -->
+                <oj-dialog style="display:none; width:60vw; height:60vh;" initial-visibility="hide"
+                           modality="modeless"
+                           id="messagesContainerDialog" dialog-title="Messages"
+                           position='{"my": {"vertical":"center", "horizontal": "center"},
+                                "at": {"vertical": "center", "horizontal": "center"},
+                                "offset" : {"x" : "20"},
+                                "of": "window"}'>
+                  <div slot="body" style="padding-top:0;" >
+
+                    <!-- Use oj-defer because we do not want to create oj-messages until dialog shows -->
+                    <oj-defer>
+
+                      <!-- Messages -->
+                      <oj-messages id="messages-id" messages="{{dataprovider}}"
+                                   display="[[messagesDisplay]]" position="[[messagesPosition]]"
+                                   :style="[[messagesStyle]]">
+                      </oj-messages>
+
+                      <!-- Content -->
+                      <div id="content" role="main" class="oj-sm-padding-2x-top">
+                      </div>
+
+                    </oj-defer>
+                  </div>
+
+                  <div slot="footer" class="oj-dialog-footer-separator">
+                    <div class="oj-flex">
+                      <div class="oj-flex-item">
+                        <oj-button on-oj-action="[[closeMessagesDialog]]">Close</oj-button>
+                      </div>
+                    </div>
+                  </div>
+
+                </oj-dialog>
               </oj-toolbar>
             </div>
           </div>
         </header>
 
-        <div id="contentContainer" class="flex-bar grow align-stretch">
+        <div id="contentContainer" class="flex-bar grow align-stretch" style="height: calc(100vh - 100px);">
           <div role="navigation" class="flex-column">
             <oj-navigation-list class="oj-sm-only-hide oj-md-condense oj-md-justify-content-flex-end"
                                 data="[[navDataSource]]"

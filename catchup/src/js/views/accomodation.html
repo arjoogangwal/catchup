@@ -1,17 +1,40 @@
 <div class="oj-hybrid-padding module-content-container flex-container">
-  <h1>Accomodations</h1>
+  <h1>Accommodations</h1>
   <div id="accomodationContentContainer" class="flex-bar">
-   <div id="sampleDemo" style="" class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
+   <div id="iframe" style="" class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
       <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
       </iframe>
     </div>
 
-    <div id="sampleDemo" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+    <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
       <oj-button id="iconButton" on-oj-action='[[postButtonClick]]'>
-      	<span slot='startIcon' class="oj-icon icon-dummy">
+          <span slot='startIcon' class="oj-icon icon-dummy">
         </span>
-        POST
-       </oj-button>
+          POST
+      </oj-button>
+          <oj-dialog style="display:none" id="modalDialog1" dialog-title="Post a new listing">
+              <div slot="body">
+                  <div>
+                      <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{postDescription}}">
+                      </oj-text-area>
+                  </div>
+                  <div id="postForm" style="width: 1px; min-width: 100%;">
+                          <div class="oj-form" >
+                              <oj-input-text id="location" placeholder="Location" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
+                              <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
+                              <oj-label for="price" class="oj-label-inline">$</oj-label>
+                              <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
+                          </div>
+                  </div>
+              </div>
+              <div slot="footer">
+                  <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                  </oj-button>
+                  <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
+                  </oj-button>
+              </div>
+          </oj-dialog>
+
 
        <oj-list-view id="listview" aria-label="list using array" 
                 data="[[dataProvider]]" 

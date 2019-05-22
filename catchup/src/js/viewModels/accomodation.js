@@ -1,19 +1,34 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider',  'ojs/ojlistview', 'ojs/ojbutton', 'ojs/ojinputtext', 'ojs/ojlabel'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider',  'ojs/ojlistview', 'ojs/ojdialog', 'ojs/ojbutton',
+        'ojs/ojinputtext', 'ojs/ojlabel'],
  function(oj, ko, $, ArrayDataProvider) {
   
     function DashboardViewModel() {
-      var self = this;
+        var self = this;
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
-      self.postButtonClick = function(event){
-        console.log("button clicked");
-        //show dialog for posting question
-        return true;
-      }
+        self.postButtonClick = function(event){
+          document.getElementById('modalDialog1').open();
+        };
+
+        self.closePostDialog = function (event) {
+          document.getElementById('modalDialog1').close();
+        };
+
+        self.savePost = function (event) {
+
+            //TODO -> Write code for saving post
+            document.getElementById('modalDialog1').close();
+        };
+
+        self.postDescription = ko.observable("");
+        self.postLocation = ko.observable("");
+        self.postZip = ko.observable("");
+        self.postPrice = ko.observable("");
+
 
       var data = [{name: 'Timberleaf Apartments', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
                     {name: 'Park Central', version: '10.3.6', nodes: 1, cpu: 1, type: 'Flat', balancer: 1, memory: 'April 1, 2019'},
@@ -31,7 +46,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider',  'ojs/ojl
                                                     {keys: data.map(function(value) {
                                                          return value.name;
                                                      })}); 
-    };
+    }
     /*
      * Returns a constructor for the ViewModel so that the ViewModel is constructed
      * each time the view is displayed.  Return an instance of the ViewModel if

@@ -1,16 +1,15 @@
-/**
- * @license
- * Copyright (c) 2014, 2019, Oracle and/or its affiliates.
- * The Universal Permissive License (UPL), Version 1.0
- */
+
 /*
  * Your application specific code will go here
  */
 define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas'],
+  'ojs/ojoffcanvas',  'ojs/ojbutton',
+        'ojs/ojmenu', 'ojs/ojoption',
+        'ojs/ojdialog', 'ojs/ojselectcombobox', 'ojs/ojdefer', 'ojs/ojmessages', 'ojs/ojarraydataprovider'],
   function(oj, ko, moduleUtils) {
      function ControllerViewModel() {
-       var self = this;
+
+         var self = this;
 
       // Media queries for repsonsive layouts
       var smQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.SM_ONLY);
@@ -96,6 +95,57 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
         new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
         new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
       ]);
+
+      self.menuItemAction = function( event ) {
+          if(event && event.target && event.target.value === "msg"){
+              self.openMessagesDialog();
+
+          }
+
+      }.bind(this);
+
+      //Messages Dialog region
+
+         // TODO -> Fetch real time messages from the server
+         self.applicationMessages = [
+             {
+                 "severity": "error",
+                 "summary": "Error message summary",
+                 "detail": "Error message detail",
+                 "closeAffordance": "none"
+             },
+             {
+                 "severity": "error",
+                 "summary": "Warning message summary",
+                 "detail": "Warning message detail",
+                 "closeAffordance": "none"
+             }
+         ];
+         self.dataprovider = new oj.ArrayDataProvider(self.applicationMessages);
+
+         self.openMessagesDialog = function(event)
+         {
+             // self.selectedLayoutOption("inline");
+             document.getElementById("messagesContainerDialog").open();
+         };
+
+         self.closeMessagesDialog = function(event)
+         {
+             document.getElementById("messagesContainerDialog").close();
+         };
+
+         self.messagesStyle = ko.computed(function() {
+             return {"width": "100%", "min-width": "100%", "maxWidth": "100%"};
+         });
+
+         self.messagesPosition = ko.computed(function() {
+             return null;
+         });
+
+         self.messagesDisplay = ko.computed(function() {
+             return "general";
+         });
+
      }
 
      return new ControllerViewModel();

@@ -1,0 +1,98 @@
+<div id="page1" class="demo-page">
+    <oj-list-view id="listview" aria-label="drill down list"
+                  data="[[dataProvider]]" on-selection-changed="[[gotoContent]]" selection-mode="single">
+        <template slot="itemTemplate">
+            <div class="oj-flex-bar">
+                <div class="oj-flex-bar-middle oj-flex-bar">
+                    <div class="oj-flex-bar-middle" style="font-weight: bold">
+                        <oj-bind-text value="[[$current.data.name]]"></oj-bind-text>
+                    </div>
+                    <div class="oj-flex-bar-end">
+                        <span class="oj-flex-item"><oj-bind-text value="[[$current.data.date]]"></oj-bind-text></span>
+                    </div>
+                </div>
+                <div class="oj-flex-bar-end oj-sm-align-items-center">
+                    <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+                </div>
+            </div>
+        </template>
+    </oj-list-view>
+</div>
+
+<div id="page2" class="demo-page demo-page2-hide">
+    <oj-button id="backButton" on-oj-action="[[gotoList]]">
+        <span slot="startIcon" class="oj-fwk-icon-caret-start oj-fwk-icon"></span>
+        Back
+    </oj-button>
+    <div class="oj-panel demo-panel">
+        <!-- ko if: type === 'buySell'  -->
+        <div>
+            <oj-bind-text value='[[content.description]]'></oj-bind-text>
+        </div>
+        <div>
+                    <span>
+                    <oj-bind-text value='[[content.address]]'></oj-bind-text>
+                </span>
+            <span>
+                    <oj-bind-text value='[[content.city]]'></oj-bind-text>
+                </span>
+            <span>
+                    <oj-bind-text value='[[content.state]]'></oj-bind-text>
+                </span>
+            <span>
+                    <oj-bind-text value='[[content.zipcode]]'></oj-bind-text>
+                </span>
+        </div>
+
+        <div>
+            <oj-bind-text value='[[content.condition]]'></oj-bind-text>
+        </div>
+        <div>
+            <oj-bind-text value='[[content.price]]'></oj-bind-text>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: type === 'academic'  -->
+        <div>
+            <oj-bind-text value='[[content.description]]'></oj-bind-text>
+        </div>
+        <div>
+                    <span>
+                    <oj-bind-text value='[[content.address]]'></oj-bind-text>
+                </span>
+            <span>
+                    <oj-bind-text value='[[content.city]]'></oj-bind-text>
+                </span>
+            <span>
+                    <oj-bind-text value='[[content.state]]'></oj-bind-text>
+                </span>
+            <span>
+                    <oj-bind-text value='[[content.zipcode]]'></oj-bind-text>
+                </span>
+        </div>
+
+        <div>
+            <oj-bind-text value='[[content.condition]]'></oj-bind-text>
+        </div>
+        <div>
+            <oj-bind-text value='[[content.price]]'></oj-bind-text>
+        </div>
+        <!-- /ko -->
+        <oj-list-view id="listview" aria-label="list using observable array"
+                      data="[[internalListDataProvider]]" selection-mode="single" selection="{{selectedItems}}">
+            <template slot="itemTemplate">
+                <!-- ko if: type === 'buySell'  -->
+                <span> Reply 1 </span>
+                <!-- /ko -->
+                <!-- ko if: type === 'academic'  -->
+                <span> Reply 1 </span>
+                <!-- /ko -->
+            </template>
+        </oj-list-view>
+        <div class="oj-flex-bar" style="padding-top:20px;">
+            <oj-button class='oj-button-sm oj-flex-bar-end' id="buttonIcon2" on-oj-action="[[replyToPost]]">
+                Reply
+            </oj-button>
+        </div>
+    </div>
+</div>

@@ -1,20 +1,121 @@
 
 <div class="oj-hybrid-padding module-content-container">
-  <h1>Incidents Content Area</h1>
   <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
-        
-        <div id="div1">
-        
-          <oj-label for="text-area">Post your question</oj-label><br/>
-          <oj-text-area id="text-area" value="{{value}}">
-          </oj-text-area>
-        
-          <br/><br/>
-        
-         </div>
-         <div id='buttons-container'>
-            <oj-button id='button1' on-oj-action='[[buttonClick]]'>Submit</oj-button>
-            
-        </div>
-     </div>
- </div>
+
+      <div id="tabbarcontainer">
+          <oj-tab-bar
+                  on-oj-before-current-item='[[tabChangeHandler]]'
+                  display="all"
+                  edge="top"
+                  selection="{{selectedItem}}">
+              <ul>
+                  <li id="courseWorkList">
+                      <a href="#">
+                          Coursework
+                      </a>
+                  </li>
+                  <li id="hotSkillsList">
+                      <a href="#">
+                          Hot Skills
+                      </a>
+                  </li>
+              </ul>
+
+              <!-- ko if: currentTab() === "courseWorkList" && !questionPosted() -->
+              <div id="coursework">
+
+                  <div id="accomodationContentContainer" class="flex-bar" style="padding-top: 50px;">
+                      <div class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
+                          <div style="max-width: 50%; margin-left: 20%;">
+                              <academicpostquestion class="flex-column flex-column overflow-hidden grow" ></academicpostquestion>
+                          </div>
+                          <div id="iframe" style="" class="demo-padding flex-column grow align-stretch">
+                              <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
+
+                              </iframe>
+                          </div>
+                      </div>
+
+                      <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+
+                          <div id="listviewContainer" class="demo-container">
+                              <academicdrilldownlist class="flex-column flex-column overflow-hidden grow" ></academicdrilldownlist>
+                          </div>
+
+                      </div>
+
+                  </div>
+              </div>
+              <!-- /ko -->
+
+              <!-- ko if: currentTab() === "courseWorkList" && questionPosted() -->
+
+              <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+                  <h2 data-bind="text: postedQuestionText"></h2>
+
+                  <div class="oj-flex-bar">
+                      <h4 class="oj-flex-bar-start"> Related Questions...</h4>
+                      <oj-button id="iconButton" class="oj-flex-bar-end" on-oj-action='[[backToAllQuestionsList]]'>
+                          Back
+                      </oj-button>
+
+                  </div>
+                  <div id="listviewContainer" class="demo-container">
+                      <academicdrilldownlist class="flex-column flex-column overflow-hidden grow" ></academicdrilldownlist>
+                  </div>
+              </div>
+
+
+              <!-- /ko -->
+
+
+              <!-- ko if: currentTab() === "hotSkillsList" && !questionPosted() -->
+              <div id="hotskills">
+                  <div id="accomodationContentContainer" class="flex-bar" style="padding-top: 50px;">
+                      <div class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
+                          <div style="max-width: 50%; margin-left: 20%;">
+                              <academicpostquestion class="flex-column flex-column overflow-hidden grow" ></academicpostquestion>
+                          </div>
+                          <div id="iframe" style="" class="demo-padding flex-column grow align-stretch">
+                              <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
+
+                              </iframe>
+                          </div>
+                      </div>
+
+                      <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+
+                          <div id="listviewContainer" class="demo-container">
+                              <academicdrilldownlist class="flex-column flex-column overflow-hidden grow" ></academicdrilldownlist>
+
+                          </div>
+
+                      </div>
+
+                  </div>
+              </div>
+              <!-- /ko -->
+
+              <!-- ko if: currentTab() === "hotSkillsList" && questionPosted() -->
+              <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+                  <h2 data-bind="text: postedQuestionText"></h2>
+
+                  <div class="oj-flex-bar">
+                      <h4 class="oj-flex-bar-start"> Related Questions...</h4>
+                      <oj-button id="iconButton" class="oj-flex-bar-end" on-oj-action='[[backToAllQuestionsList]]'>
+                          Back
+                      </oj-button>
+
+                  </div>
+
+                  <div id="listviewContainer" class="demo-container">
+                      <academicdrilldownlist class="flex-column flex-column overflow-hidden grow" ></academicdrilldownlist>
+                  </div>
+              </div>
+
+              <!-- /ko -->
+          </oj-tab-bar>
+      </div>
+
+  </div>
+</div>
