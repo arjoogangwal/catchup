@@ -241,10 +241,12 @@
     transition: border .2s ease-in-out;
 }
 
-.icon-dummy{
+.icon-food-night{
 	background:url(images/FOODandN.jpg) center right no-repeat;
 	padding:0 16px 0 0;
 	white-space:nowrap;
+    width: 10px;
+    height: 10px;
 }
 
 .module-content{
@@ -272,8 +274,9 @@
 }
 
 .accomodation-dashboard-container{
-	width: 50%;
-    max-width: 60%;
+	width: 65%;
+    max-width: 65%;
+    min-width: 65%;
 }
 
 .oj-fwk-icon-status-error, .oj-message-status-icon.oj-message-error-icon, .oj-progressstatus-error-icon {
@@ -300,6 +303,11 @@ html:not([dir="rtl"]) .oj-messages-general .oj-message-body, html:not([dir="rtl"
 
 .display-none-toggle{
     display: none;
+}
+
+.ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 

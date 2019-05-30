@@ -1,8 +1,13 @@
 <div class="oj-hybrid-padding module-content-container flex-container">
-    <h1>Buy/Sell</h1>
+    <h1>
+    <img slot="startIcon"
+                          src="css/images/events.png"
+                          alt="bulleted list image"
+                          width="26" height="26"/>
+                      Events</h1>
     <div id="accomodationContentContainer" class="flex-bar">
 
-        <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+        <div id="contents" style="width: 100%; max-width: 100%;" class="demo-padding demo-container flex-column  grow align-stretch">
             <div class="oj-flex-bar">
                 <oj-button on-oj-action='[[postButtonClick]]' class='oj-button-sm oj-flex-bar-end' style="width: 200px; max-width: 200px;" chroming='full'>
                     Post
@@ -69,7 +74,54 @@
             </oj-dialog>
 
             <div id="listviewContainer" class="demo-container">
-                <eventsdrilldownlist class="flex-column flex-column overflow-hidden grow" ></eventsdrilldownlist>
+    <oj-list-view id="listview" aria-label="drill down list"
+                  data="[[dataProvider]]" selection-mode="single">
+        <template slot="itemTemplate">
+            <div class="container oj-flex-bar">
+                <div class="flex-column oj-flex-bar-middle">
+                    <div>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.title]]"></oj-bind-text>
+                        </span>
+                    <div>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.type]]"></oj-bind-text>
+                        </span>
+                    </div>
+                     <div>
+                        <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;">
+                            <oj-bind-text value="[[$current.data.date]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;">
+                            <oj-bind-text value="[[$current.data.description]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.address]]"></oj-bind-text>
+                        </span>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.city]]"></oj-bind-text>
+                        </span>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.state]]"></oj-bind-text>
+                        </span>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.zip]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        Go To: <a class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.url]]"></oj-bind-text>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+    </oj-list-view>
 
             </div>
         </div>

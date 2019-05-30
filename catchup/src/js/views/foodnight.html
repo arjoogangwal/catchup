@@ -1,5 +1,12 @@
 
 <div class="oj-hybrid-padding module-content-container">
+    <h1>
+        <img slot="startIcon"
+                          src="css/images/foodnightlife.jpeg"
+                          alt="bulleted list image"
+                          width="26" height="26"/>
+
+    Food & Nightlife</h1>
     <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
 
         <!-- ko if: !questionPosted() -->
@@ -17,7 +24,7 @@
                     </div>
                 </div>
 
-                <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+                <div id="contents" style="width:29%; max-width: 29%;" class="demo-padding demo-container flex-column  grow align-stretch">
 
                     <div id="listviewContainer" class="demo-container">
                         <foodnightdrilldownlist class="flex-column flex-column overflow-hidden grow" ></foodnightdrilldownlist>
@@ -31,7 +38,7 @@
 
         <!-- ko if: questionPosted() -->
 
-        <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
+        <div id="contents" style="width:29%; max-width: 29%;" class="demo-padding demo-container flex-column  grow align-stretch">
             <h2 data-bind="text: postedQuestionText"></h2>
 
             <div class="oj-flex-bar">

@@ -41,27 +41,24 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojarraydataprovider', 'partials/
            self.postLocation = ko.observable("");
            self.postZip = ko.observable("");
            self.postPrice = ko.observable("");
-           self.drillDownListVM = new DrillDownList(self, "buySell");
+
+           self.outerListData = ko.observableArray();
+
+            self.fetchData =  function(){
+                var url = 'http://0.0.0.0:4000/events';
+                $.get(url, function(responseText) {
+                    console.log(responseText.data);
+                    self.outerListData(responseText.data);
+                });
+            }
+
+            self.dataProvider = new ArrayDataProvider(self.outerListData, {'keyAttributes': 'id'});
+
+            self.fetchData();
+
+            self.currentListItemSelectedId = ko.observable();
 
          }
-
-         //region register partials
-         ko.components
-             .register(
-                 "eventsdrilldownlist",
-                 {
-                   viewModel: {
-                     createViewModel: function (params,
-                                                componentInfo) {
-                       var buySellViewModel = ko
-                           .contextFor(componentInfo.element).$data;
-                       return buySellViewModel.drillDownListVM;
-                     }
-                   },
-                   template: {
-                     require: "text!partials/drilldownlist.html"
-                   }
-                 });
 
          /*
           * Returns a constructor for the ViewModel so that the ViewModel is constructed

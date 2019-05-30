@@ -9,7 +9,7 @@ define(
 
         "use strict";
 
-        function PostQuestionVM(params) {
+        function PostQuestionVM(params, type) {
 
             // Make certain this function is called as a constructor.
             // This is naturally the case when called by ojModule.
@@ -19,18 +19,30 @@ define(
 
             var self = this; // this == ViewModel instance
 
+            self.type = type;
+
             self.parentVM = params;
 
             self.questionText = ko.observable("");
 
             self.postButtonClick = function(event){
-                console.log("post button clicked");
-                /*$.get('http://0.0.0.0:4000/show', function(responseText) {
-                    console.log(responseText);
-                });*/
+                var successFunction = function(data){
+                    self.parentVM.questionPosted(true);
+                }
 
-                self.parentVM.questionPosted(true);
+                var data = {
+                    "q_description" : self.questionText(),
+                    "q_category" : self.type
+                }
 
+                $.ajax({
+                    url: 'http://0.0.0.0:4000/postQuestions',
+                    type: 'POST',
+                    data: data
+                })
+                .done(function(data) {
+                    successFunction();
+                });
                 //TODO -> navigate to related questions list after clicking post
                 return true;
             };

@@ -30,22 +30,69 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojarraydataprovider',  'ojs/ojl
         self.postPrice = ko.observable("");
 
 
-      var data = [{name: 'Timberleaf Apartments', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Park Central', version: '10.3.6', nodes: 1, cpu: 1, type: 'Flat', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Domicilio Apartments', version: '10.3.6', nodes: 2, cpu: 1, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Environment', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security1', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security2', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security3', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security4', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security5', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'},
-                    {name: 'Security6', version: '10.3.6', nodes: 2, cpu: 2, type: 'Townhome', balancer: 1, memory: 'April 1, 2019'}
-                   ];
-      self.dataProvider = new ArrayDataProvider(data, 
-                                                    {keys: data.map(function(value) {
-                                                         return value.name;
-                                                     })}); 
+        self.outerListData = ko.observableArray();
+
+        self.fetchData =  function(){
+                var url = 'http://0.0.0.0:4000/accomodations';
+                $.get(url, function(responseText) {
+                    console.log(responseText.data);
+                    self.outerListData(responseText.data);
+                });
+        }
+
+        self.dataProvider = new ArrayDataProvider(self.outerListData, {'keyAttributes': 'id'});
+
+        self.fetchData();
+
+        self.currentAccomodation = ko.observable("");
+
+        self.internalListData = ko.observableArray();
+
+        self.gotoOuterList = function(event, ui) {
+              document.getElementById("listview").currentItem = null;
+              self.slide();
+        };
+
+        self.currentListItemSelectedId = ko.observable();
+
+        self.gotoContent = function(event, data) {
+                if (event.detail.value != null && event.detail.value.length > 0)
+                {
+                    var row = self.outerListData().find(function(item){
+                        return item.id == event.detail.value;
+
+                    });
+                    self.currentListItemSelectedId(row.id);
+                    self.currentAccomodation(row.description);
+                    var repliesUrl = 'http://0.0.0.0:4000/accomodationReplies?accomodationId=' + row.id;
+                    $.get(repliesUrl, function(responseText) {
+                        console.log(responseText.data);
+                        self.internalListData(responseText.data);
+                        self.slide();
+                    });
+
+                }
+            };
+
+        self.slide = function() {
+              $("#page1").toggleClass("demo-page1-hide");
+              $("#page2").toggleClass("demo-page2-hide");
+              $("#postButton").toggleClass("display-none-toggle");
+        };
+
+        //REGION INTERNAL DRILLED LIST
+
+        self.internalListDataProvider = new ArrayDataProvider(self.internalListData, {'keyAttributes': 'id'});
+        self.selectedItems = ko.observableArray([]);
+
+        self.replyToPost = function(event){
+                // document.getElementById('modalDialog1').open();
+        };
+
+
+        var lastItemId = self.internalListData().length;
+
+
     }
     /*
      * Returns a constructor for the ViewModel so that the ViewModel is constructed

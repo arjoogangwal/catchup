@@ -1,91 +1,126 @@
 <div id="page1" class="demo-page">
+    <h4 data-bind="text:listHeading"></h4>
     <oj-list-view id="listview" aria-label="drill down list"
                   data="[[dataProvider]]" on-selection-changed="[[gotoContent]]" selection-mode="single">
         <template slot="itemTemplate">
-            <div class="oj-flex-bar">
-                <div class="oj-flex-bar-middle oj-flex-bar">
-                    <div class="oj-flex-bar-middle" style="font-weight: bold">
-                        <oj-bind-text value="[[$current.data.name]]"></oj-bind-text>
+            <!-- ko if: type === 'buySell'  -->
+            <div class="container oj-flex-bar" style="white-space: normal;">
+                <div class="flex-column oj-flex-bar-middle">
+                    <div>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text>
+                        </span>
                     </div>
-                    <div class="oj-flex-bar-end">
-                        <span class="oj-flex-item"><oj-bind-text value="[[$current.data.date]]"></oj-bind-text></span>
+                    <div>
+                        <span class="oj-text-secondary-color">
+                            <oj-bind-text value="[[$current.data.type]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="oj-text-secondary-color" style="white-space: normal;">
+                            <oj-bind-text value="[[$current.data.title]]"></oj-bind-text>
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="oj-text-secondary-color"  style="white-space: normal;">
+                            City : 
+                            <oj-bind-text value="[[$current.data.city]]"></oj-bind-text>
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="oj-text-secondary-color"  style="white-space: normal;">
+                            Condition : 
+                            <oj-bind-text value="[[$current.data.condition]]"></oj-bind-text>
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="oj-text-secondary-color"  style="white-space: normal;">
+                            Status : 
+                            <oj-bind-text value="[[$current.data.status]]"></oj-bind-text>
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="oj-text-secondary-color"  style="white-space: normal;">
+                            Price : $
+                            <oj-bind-text value="[[$current.data.price]]"></oj-bind-text>
+                        </span>
                     </div>
                 </div>
                 <div class="oj-flex-bar-end oj-sm-align-items-center">
                     <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
                 </div>
             </div>
+            <!-- /ko -->
+            <!-- ko if: type === 'COURSEWORK' || type === 'HOT SKILLS' || type === 'ON_CAMPUS' || type === 'FOOD AND NIGHTLIFE'  -->
+            <div class="container oj-flex-bar" style="white-space: normal;">
+                <div class="flex-column oj-flex-bar-middle">
+                    <div>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="oj-text-secondary-color" style="white-space: normal;">
+                            <oj-bind-text value="[[$current.data.question_description]]"></oj-bind-text>
+                        </span>
+                    </div>
+                </div>
+                <div class="oj-flex-bar-end oj-sm-align-items-center">
+                    <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+                </div>
+            </div>
+            <!-- /ko -->
+
         </template>
     </oj-list-view>
 </div>
 
 <div id="page2" class="demo-page demo-page2-hide">
-    <oj-button id="backButton" on-oj-action="[[gotoList]]">
+    <oj-button id="backButton" on-oj-action="[[gotoOuterList]]">
         <span slot="startIcon" class="oj-fwk-icon-caret-start oj-fwk-icon"></span>
         Back
     </oj-button>
     <div class="oj-panel demo-panel">
-        <!-- ko if: type === 'buySell'  -->
-        <div>
-            <oj-bind-text value='[[content.description]]'></oj-bind-text>
-        </div>
-        <div>
-                    <span>
-                    <oj-bind-text value='[[content.address]]'></oj-bind-text>
-                </span>
-            <span>
-                    <oj-bind-text value='[[content.city]]'></oj-bind-text>
-                </span>
-            <span>
-                    <oj-bind-text value='[[content.state]]'></oj-bind-text>
-                </span>
-            <span>
-                    <oj-bind-text value='[[content.zipcode]]'></oj-bind-text>
-                </span>
-        </div>
-
-        <div>
-            <oj-bind-text value='[[content.condition]]'></oj-bind-text>
-        </div>
-        <div>
-            <oj-bind-text value='[[content.price]]'></oj-bind-text>
-        </div>
-        <!-- /ko -->
-
-        <!-- ko if: type === 'academic'  -->
-        <div>
-            <oj-bind-text value='[[content.description]]'></oj-bind-text>
-        </div>
-        <div>
-                    <span>
-                    <oj-bind-text value='[[content.address]]'></oj-bind-text>
-                </span>
-            <span>
-                    <oj-bind-text value='[[content.city]]'></oj-bind-text>
-                </span>
-            <span>
-                    <oj-bind-text value='[[content.state]]'></oj-bind-text>
-                </span>
-            <span>
-                    <oj-bind-text value='[[content.zipcode]]'></oj-bind-text>
-                </span>
-        </div>
-
-        <div>
-            <oj-bind-text value='[[content.condition]]'></oj-bind-text>
-        </div>
-        <div>
-            <oj-bind-text value='[[content.price]]'></oj-bind-text>
-        </div>
-        <!-- /ko -->
+        <p data-bind="text: currentQuestion" class="oj-text-secondary-color" style="white-space: normal;">
+        </p>
         <oj-list-view id="listview" aria-label="list using observable array"
                       data="[[internalListDataProvider]]" selection-mode="single" selection="{{selectedItems}}">
             <template slot="itemTemplate">
                 <!-- ko if: type === 'buySell'  -->
-                <span> Reply 1 </span>
+                <div class="container oj-flex-bar">
+                    <div class="flex-column oj-flex-bar-middle">
+                        <div>
+                            <span class="oj-flex-item">
+                                <oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;">
+                                <oj-bind-text value="[[$current.data.response_description]]" style="white-space: normal;"></oj-bind-text>
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <!-- /ko -->
-                <!-- ko if: type === 'academic'  -->
-                <span> Reply 1 </span>
+                <!-- ko if: type === 'COURSEWORK' || type === 'HOT SKILLS' || type === 'ON_CAMPUS' || type === 'FOOD AND NIGHTLIFE'  -->
+                <div class="container oj-flex-bar">
+                <div class="flex-column oj-flex-bar-middle">
+                    <div>
+                        <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;">
+                            <oj-bind-text value="[[$current.data.response_description]]" style="white-space: normal;"></oj-bind-text>
+                        </span>
+                    </div>
+                </div>
+            </div>
                 <!-- /ko -->
             </template>
         </oj-list-view>

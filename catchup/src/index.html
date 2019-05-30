@@ -33,15 +33,10 @@
         <header role="banner" class="oj-web-applayout-header">
           <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
             <!-- Offcanvas toggle button -->
-            <div class="oj-flex-bar-start oj-md-hide">
-              <oj-button id="drawerToggleButton" class="oj-button-lg" on-oj-action="[[toggleDrawer]]" chroming="half" display="icons">
-                <span slot="startIcon" class="oj-web-applayout-offcanvas-icon"></span>
-                <span>Application Navigation</span>
-              </oj-button>
-            </div>
-            <div class="oj-flex-bar-middle oj-sm-align-items-baseline">
-              <span role="img" class="oj-icon scu-icon"  style="width: 40px;height: 40px;" title="SCU logo" alt="SCU Logo"></span>
-              <h1 class="oj-sm-only-hide oj-web-applayout-header-title" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text></h1>
+            <div class="oj-flex-bar-start oj-sm-align-items-baseline">
+              <span role="img" class="oj-icon scu-icon"  style="width: 80px;height: 80px;" title="SCU logo" alt="SCU Logo"></span>
+              <h1 class="oj-web-applayout-header-title" style="margin: auto;padding-left: 10px;FONT-SIZE: x-large;FONT-FAMILY: fantasy;" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text>
+              </h1>
             </div>
             <div class="oj-flex-bar-end">
               <!-- Responsive Toolbar -->

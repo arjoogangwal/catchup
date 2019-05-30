@@ -1,19 +1,18 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
- function(oj, ko, $) {
+define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojrouter'],
+ function(oj, ko, $, Router) {
   
     function DashboardViewModel() {
       var self = this;
+
+      var router = Router.rootInstance;
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
       self.iconButtonClick = function(event){
-        console.log("button clicked");
-        $.get('http://0.0.0.0:4000/show', function(responseText) {
-          console.log(responseText);
-        });
+        router.go(event.target.id);
         return true;
       }
 

@@ -25,7 +25,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
            self.postQuestionVM = new PostQuestion(self);
 
            //Drill down list REGION
-           self.drillDownListVM = new DrillDownList(self, "foodnight");
+           self.drillDownListVM = new DrillDownList(self, "FOOD AND NIGHTLIFE");
 
          }
 

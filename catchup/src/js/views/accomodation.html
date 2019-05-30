@@ -1,82 +1,150 @@
-<div class="oj-hybrid-padding module-content-container flex-container">
-  <h1>Accommodations</h1>
-  <div id="accomodationContentContainer" class="flex-bar">
-   <div id="iframe" style="" class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
-      <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
-      </iframe>
-    </div>
-
-    <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
-      <oj-button id="iconButton" on-oj-action='[[postButtonClick]]'>
-          <span slot='startIcon' class="oj-icon icon-dummy">
-        </span>
-          POST
-      </oj-button>
-          <oj-dialog style="display:none" id="modalDialog1" dialog-title="Post a new listing">
+  <div class="oj-hybrid-padding module-content-container flex-container">
+    <h1>Accommodations</h1>
+    <div id="accomodationContentContainer" class="flex-bar">
+     <div id="iframe" style="" class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
+    <div class='tableauPlaceholder' id='viz1559246654166' style="max-width:100%">
+    <noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ac&#47;AccomodationNearSCU&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript>
+    <object class='tableauViz'  style='display:none;'>
+      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+      <param name='embed_code_version' value='3' />
+      <param name='site_root' value='' />
+      <param name='name' value='AccomodationNearSCU&#47;Dashboard1' />
+      <param name='tabs' value='no' />
+      <param name='toolbar' value='yes' />
+      <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ac&#47;AccomodationNearSCU&#47;Dashboard1&#47;1.png' />
+      <param name='animate_transition' value='yes' />
+      <param name='display_static_image' value='yes' />
+      <param name='display_spinner' value='yes' />
+      <param name='display_overlay' value='yes' />
+      <param name='display_count' value='yes' />
+   </object>
+</div>          
+<script type='text/javascript'>
+  var divElement = document.getElementById('viz1559246654166');
+  var vizElement = divElement.getElementsByTagName('object')[0];vizElement.style.minWidth='720px';vizElement.style.maxWidth='100%';vizElement.style.width='100%';vizElement.style.minHeight='587px';vizElement.style.maxHeight='887px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
+  var scriptElement = document.createElement('script');scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+</script>
+      </div>
+      <div id="contents" style="width:32%; max-width: 32%;" class="demo-padding demo-container flex-column  grow align-stretch">
+        <oj-button id="iconButton" on-oj-action='[[postButtonClick]]'>
+            <span slot='startIcon' class="oj-icon icon-dummy">
+          </span>
+            POST A NEW LISTING
+        </oj-button>
+        <oj-dialog style="display:none" id="modalDialog1" dialog-title="Post a new listing">
               <div slot="body">
-                  <div>
-                      <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{postDescription}}">
-                      </oj-text-area>
-                  </div>
-                  <div id="postForm" style="width: 1px; min-width: 100%;">
-                          <div class="oj-form" >
+                <div>
+                  <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{postDescription}}">                 
+                  </oj-text-area>
+                </div>
+              <div id="postForm" style="width: 1px; min-width: 100%;">
+                <div class="oj-form" >
                               <oj-input-text id="location" placeholder="Location" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
                               <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
                               <oj-label for="price" class="oj-label-inline">$</oj-label>
                               <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
                           </div>
-                  </div>
-              </div>
-              <div slot="footer">
-                  <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
-                  </oj-button>
-                  <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
-                  </oj-button>
-              </div>
-          </oj-dialog>
-
-
-       <oj-list-view id="listview" aria-label="list using array" 
-                data="[[dataProvider]]" 
-                selection-mode="single">
-            <template slot="itemTemplate">
-                <div class="oj-flex">
-                    <div class="oj-flex-item" style="max-width:70px;margin:auto;">
-                        <img data-bind="attr: {src: 'css/images/home.png', alt: $current.data.name}" style="width: 55px;height: 55px;max-width: 55px;max-height: 55px;" />
-                    </div>
-                    <div class="oj-flex-item" style="width:75%">
-                        <div class="oj-lg-10 oj-md-10 oj-sm-12">
-                            <div class="oj-flex row">
-                                <div class="oj-lg-12">
-                                    <span class="header"><oj-bind-text value="[[$current.data.name]]"></oj-bind-text></span>
-                                </div>
-                            </div>
-                            <div class="oj-flex row">
-                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
-                                    <span class="data"><b>Address: </b><span><oj-bind-text value="[[$current.data.version]]"></oj-bind-text></span></span>
-                                </div>
-                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
-                                    <span class="data"><b>Beds: </b><span><oj-bind-text value="[[$current.data.nodes]]"></oj-bind-text></span></span>
-                                </div>
-                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
-                                    <span class="data"><b>Baths: </b><span><oj-bind-text value="[[$current.data.cpu]]"></oj-bind-text></span></span>
-                                </div>
-                            </div>
-                            <div class="oj-flex row">
-                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
-                                    <span class="data"><b>Type: </b><span><oj-bind-text value="[[$current.data.type]]"></oj-bind-text></span></span>
-                                </div>
-                            </div>
-                            <div class="oj-flex row">
-                                <div class="oj-lg-4 oj-md-4 oj-sm-12">
-                                    <span class="data"><b>Date Posted: </b><span><oj-bind-text value="[[$current.data.memory]]"> GB</oj-bind-text></span></span>
-                                </div>
-                            </div>
                         </div>
-                    </div>
+                      </div>
+                <div slot="footer">
+                    <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                    </oj-button>
+                    <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
+                    </oj-button>
                 </div>
-            </template>
+            </oj-dialog>
+
+
+          <div id="page1" class="demo-page">
+            <oj-list-view id="listview" aria-label="drill down list"
+                    data="[[dataProvider]]" on-selection-changed="[[gotoContent]]" selection-mode="single">
+                    <template slot="itemTemplate">
+                      <div class="oj-flex-bar">
+                      <div class="oj-flex-bar-start" style="max-width:70px;margin:auto;">
+                          <img data-bind="attr: {src: 'css/images/home.png', alt: $current.data.description}" style="width: 55px;height: 55px;max-width: 55px;max-height: 55px;" />
+                      </div>
+                      <div class="oj-flex-bar-middle" style="width:75%; padding-left: 10px;">
+                          <div class="oj-lg-10 oj-md-10 oj-sm-12">
+                            <div class="oj-flex row">
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><span><oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text></span></span>
+                                  </div>
+                              </div>
+                              <div class="oj-flex row">
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><b>Type: </b><span><oj-bind-text value="[[$current.data.type]]"></oj-bind-text></span></span>
+                                  </div>
+                              </div>
+                              <div class="oj-flex row">
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><b>Beds: </b><span><oj-bind-text value="[[$current.data.bed]]"></oj-bind-text></span></span>
+                                  </div>
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><b>Baths: </b><span><oj-bind-text value="[[$current.data.bath]]"></oj-bind-text></span></span>
+                                  </div>
+                              </div>
+                              <div class="oj-flex row">
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><b>City: </b><span><oj-bind-text value="[[$current.data.city]]"> </oj-bind-text></span></span>
+                                  </div>
+                              </div>
+                              <div class="oj-flex row">
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><b>Occupancy: </b><span><oj-bind-text value="[[$current.data.occupancy]]"></oj-bind-text></span></span>
+                                  </div>
+                              </div>
+                              <div class="oj-flex row">
+                                  <div class="oj-lg-4 oj-md-4 oj-sm-12">
+                                      <span class="data"><b>Price: $ </b><span><oj-bind-text value="[[$current.data.price]]"> </oj-bind-text></span></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="oj-flex-bar-end oj-sm-align-items-center">
+                        <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon">
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                </oj-list-view>
+              </div>
+
+              <div id="page2" class="demo-page demo-page2-hide">
+    <oj-button id="backButton" on-oj-action="[[gotoOuterList]]">
+        <span slot="startIcon" class="oj-fwk-icon-caret-start oj-fwk-icon"></span>
+        Back
+    </oj-button>
+    <div class="oj-panel demo-panel">
+        <p data-bind="text: currentAccomodation" class="oj-text-secondary-color" style="white-space: normal;">
+        </p>
+        <oj-list-view id="listview" aria-label="list using observable array"
+                      data="[[internalListDataProvider]]" selection-mode="single" selection="{{selectedItems}}">
+                      <template slot="itemTemplate">
+                        <div class="container oj-flex-bar">
+                          <div class="flex-column oj-flex-bar-middle">
+                            <div>
+                              <span class="oj-flex-item">
+                                <oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text>
+                              </span>
+                            </div>
+                            <div>
+                              <span class="oj-text-xs oj-text-secondary-color">
+                                <oj-bind-text value="[[$current.data.response_description]]"></oj-bind-text>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
         </oj-list-view>
-   </div>
-</div>
-</div>
+        <div class="oj-flex-bar" style="padding-top:20px;">
+            <oj-button class='oj-button-sm oj-flex-bar-end' id="buttonIcon2" on-oj-action="[[replyToPost]]">
+                Reply
+            </oj-button>
+        </div>
+      </div>
+    </div>
+
+     </div>
+  </div>
+  </div>

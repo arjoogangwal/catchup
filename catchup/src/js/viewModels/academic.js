@@ -20,9 +20,18 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
 
         self.currentTab = ko.observable("courseWorkList");
 
+        self.drillDownListHeading = ko.observable("Questions Related To Coursework:");
+
         self.tabChangeHandler = function(event){
-            if(event && event.detail && event.detail.previousKey!== event.detail.key && (event.detail.key === "courseWorkList" || event.detail.key === "hotSkillsList"))
-                self.currentTab(event.detail.key);
+            if(event && event.detail && event.detail.previousKey!== event.detail.key && (event.detail.key === "courseWorkList" || event.detail.key === "hotSkillsList")){
+              self.currentTab(event.detail.key);
+              self.drillDownListVM = new DrillDownList(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
+              if(self.currentTab()=="courseWorkList")
+                self.drillDownListHeading("Questions Related To Coursework:");
+              else
+                self.drillDownListHeading("Questions Related To Hot Skills:");
+            }
+                
         };
 
         self.backToAllQuestionsList = function(event){
@@ -33,10 +42,10 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
         //Post Question text area and button REGION
         self.questionPosted = ko.observable(false);
         self.postedQuestionText = ko.observable("Your Posted Question");  // can be postQuestionVM.questionText()
-        self.postQuestionVM = new PostQuestion(self);
+        self.postQuestionVM = new PostQuestion(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
 
         //Drill down list REGION
-        self.drillDownListVM = new DrillDownList(self, "academic");
+        self.drillDownListVM = new DrillDownList(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
 
     }
 
@@ -44,8 +53,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
     //region register partials
 
      ko.components
-
-         .register(
+     .register(
            "academicpostquestion",
            {
              viewModel: {
