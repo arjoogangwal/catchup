@@ -91,11 +91,11 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'jquery', 'ojs/o
         this.linkTarget = linkTarget;
       }
       self.footerLinks = ko.observableArray([
-        new footerLink('About Scu', 'aboutScu', 'http://www.oracle.com/us/corporate/index.html#menu-about'),
-        new footerLink('Contact Us', 'contactUs', 'http://www.oracle.com/us/corporate/contact/index.html'),
-        new footerLink('Legal Notices', 'legalNotices', 'http://www.oracle.com/us/legal/index.html'),
-        new footerLink('Terms Of Use', 'termsOfUse', 'http://www.oracle.com/us/legal/terms/index.html'),
-        new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
+        new footerLink('About Scu', 'aboutScu', 'https://www.scu.edu/aboutscu/'),
+        new footerLink('Contact Us', 'contactUs', 'https://www.scu.edu/admission/undergraduate/contact-us/'),
+        new footerLink('Emergency', 'legalNotices', 'https://www.scu.edu/emergency/'),
+        new footerLink('Human Resources', 'termsOfUse', 'https://www.scu.edu/hr/careers/'),
+        new footerLink('Mission', 'yourPrivacyRights', 'https://www.scu.edu/missionchurch/')
       ]);
 
       self.loggedIn = ko.observable(false);
