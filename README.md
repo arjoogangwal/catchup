@@ -1,4 +1,4 @@
-# catchup
+# MSIS Capstone Project - Catchup 
 
 ![alt text](https://github.com/arjoogangwal/catchup/blob/master/rendered.jpg)
 
