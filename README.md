@@ -32,12 +32,12 @@ Json file containing the FAQs from the SCU website- Chatbot_FAQquestions.json
 
 3. Folders required by the flask framework -  *static/ and templates/*
 
-4. Folder containing css and images used in our webapp - catchup/catchup/src/css
+4. Folder containing css and images used in our webapp - *catchup/catchup/src/css*
 
-5. Folder containing javascript and html files for the webapp - catchup/catchup/src/js
+5. Folder containing javascript and html files for the webapp - *catchup/catchup/src/js*
 
-6. Starting page for our webapp - catchup/catchup/src/index.html
+6. Starting page for our webapp - *catchup/catchup/src/index.html*
 
-7. Folder containing all Javascript files - catchup/catchup/src/js/viewModels/
+7. Folder containing all Javascript files - *catchup/catchup/src/js/viewModels/*
 
-8. Folder containing all html files - catchup/catchup/src/js/views/ 
+8. Folder containing all html files - *catchup/catchup/src/js/views/* 
