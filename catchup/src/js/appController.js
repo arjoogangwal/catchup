@@ -216,7 +216,7 @@ self.signUpShowing(false);
 
          this.messagesReady = function(event) {
               if($( "div.oj-message-detail a:last-child" ).length == 0)             
-                  $('div.oj-message-detail').append("<br><a href='#''>Resume</a>");
+                  $('div.oj-message-detail').append("<br><a href='https://www.linkedin.com/ambry/?x-li-ambry-ep=AQFf7dPdv_kwgAAAAWsxItvH3_k7x7EkFpmEy3sS01x-_0i_FqDw1YUkl0PGdUa-a6ES7SKa6NOOfe8kBRov9kThwMrndTBnS9FpPuqoRcsIIMN8AperhxbTJWUxMLM-N6LK7EC5eML3xXeZJqD99raICBrZsV8CNf_uZurbAmTmFFzY0VayWk86YjIUpbW21WLC_TX_YSX4YJxeN0HsM-cgAenrq56s3FLxp_VK-4xE-nCHJa_blnP_93VvH-MkiHKDMsTa1APJvXsO83KuysnO0_R50Fv8m8__WHfEMxxXM2yrRlF81RdR_ksP1UM7GY4rU748n8fxXC3evLQuGFWdwBfZ_ZWhI_E0EVftB3laX5UndpGanYWGL7kf_LDRx6BwW1qqZHcwmJc-AzNv8eKxj28-i0oVHQHFt2zRo95hHULjQ4LN_whM3vpalRckpdaPokDf_YXrnHcFPrkBN1zgcgPuTSbzIvn_5aT2cJNYv4WnXFpmOA' target='_blank'>Resume</a>");
            }.bind(this);
 
          self.closeMessagesDialog = function(event)
