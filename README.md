@@ -2,14 +2,17 @@
 
 ![alt text](https://github.com/arjoogangwal/catchup/blob/master/rendered.jpg)
 
-SQL Dump for MySQL Database: CATCH_UP - catchup/Catch_Up_Dump_final.sql
+
+
+## SQL Dump for MySQL Database: 
+1. CATCH_UP - *catchup/Catch_Up_Dump_final.sql*
 
 
 ## Python Files: 
 
-1. Python Notebook containing the text mining code - Text mining Final code.ipynb
+1. Python Notebook containing the text mining code - *Text mining Final code.ipynb*
 
-2. Python Notebook containing the chatbot code - Chatbot_Jaccard_SQL.ipynb
+2. Python Notebook containing the chatbot code - *Chatbot_Jaccard_SQL.ipynb*
 
 ## Data Files: 
 
