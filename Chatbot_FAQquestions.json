@@ -1,0 +1,42 @@
+{
+"section_tree" : {
+        "Academic Guidance" : {
+		"Coursework" : {
+				"MSIS comprises of how many units?" : "The Core Information Systems is comprised of 16 units, the Business Core is 6 units, Electives consist of 16 units and the final 10 units for Integration. The total unit count for an MSIS degree is 48 units.",
+				"What is the timing of the classes?" : "Evening/Saturday classes to balance work, life, and study."
+		},
+		"Hotskills" : {
+				"What are the skills required in the field of analytics?" :"Python, R, SQL, Tableau, Machine Learning"
+		}
+	},
+        "Job Opportunities" : {
+		"On-Campus": {
+				"Where can I find list of all on-campus jobs available now?" : "You can log into Handshake to explore the variety of on-campus jobs available right now! Also, you can view them here: https://www.scu.edu/hr/student-employees/job-listings/",
+				"How many hours of on-campus job is allowed?" : "You can work upto 40hrs/week during Summer. Rest of the time you can work only part-time ie. 20hrs/week."
+		}, 
+		"Industry" : {
+				"When can I start working FULL-TIME?" : "You can start working when you have a valid OPT EAD Card in your hand. You need your card and it needs to be valid before you can begin work.",
+				"What do I do when I get a job?" : "Report all employment to SCU OPT Reporting Portal. SCU uses this to keep your SEVIS record up to date",
+				"How can I tell if my job is “related” to my field of study?" : "Your job duties should be related to the content of the classes and degree. If you have questions, you should contact ISS to request an advising appointment.",
+				"How many hours do I have to work to be considered “employed”?" : "Atleast 20 hours per week."
+		}
+	},
+        "Accomodation" : {
+        		"Does SCU provide on-campus housing?" : "Yes, SCU provides both furnished and non-furnished housing options.",
+        		"What are the on-campus housing rates?" : "The 2018-2019 Graduate Housing rates are based on a 10-month, academic year contract and include an allotment of 236 Meal Points per quarter. Please check the below link for detailed rates. https://www.scu.edu/living/residential-living-options/graduate/graduate--law-rates/2018-2019-graduate-rates/",
+        		"What is the contract and the cancellation policy for on-campus housing?" : "As a graduate or law student currenting living on campus, you may only request to cancel your housing contract if you are withdrawing from the University, studying abroad, or graduating prior to the end of the contract dates. If you meet one of these criteria for canceling housing, please submit a Housing Contract Release Request online through eCampus. Once your on-line request form is received and processed, you will receive an email with your next steps."
+        },
+        "Buy/Sell" : "",
+        "Events" : {
+        		"Where can I find all the events happening in SCU" : "Here's the link to view the events for graduate students: https://www.scu.edu/events/#!view/week/categories/Graduate%20Academic%20Calendar"
+        },
+        "Dining & Entertainment" : {
+        		"What is the cost of the SCU dining plan?" : "Room and board charges are billed jointly through the University Bursar's Office and appear on the Bursar Account student bill along with tuition. With all the dining meal plans you have the flexibility of dining when and how often you like as well as have the ability to purchase groceries on campus. The dining plan is a quarterly allocation of purchasing points. There is no predetermined number of meals per week, so you won’t lose out if you leave campus for a few days. First-years and Sophomores can only select from the Preferred or Basic Plan. Juniors and Seniors can select from three plans, either the Preferred, Basic, or Junior/Senior Plan. Juniors and Seniors living in an apartment style accommodation also have a fourth option to select the Apartment Plan. Each year, the dining plans include the respective number of points. Each point is equal to a dollar. For example, during the 2018 - 2019 year: Preferred - 1, 865 points per quarter, Basic - 1, 595 points per quarter, Junior/Senior - 1095 points per quarter, Apartment Plan - 236 points per quarter",
+        		"How many meals per week does SCU dining service provide?" : "The dining meal plans do not possess a guarantee of any specific number of meals. All of the resident dining plans are declining balance plans that you use to pay for whatever items you choose to purchase at the various dining venues on-campus.",
+        		"Do I get refund if I dont use all of my SCU dining points?" : "There are no cash refunds for unspent points."
+
+        }
+}
+}
+
+
