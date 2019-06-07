@@ -310,18 +310,68 @@ html:not([dir="rtl"]) .oj-messages-general .oj-message-body, html:not([dir="rtl"
     text-overflow: ellipsis;
 }
 
+a.oj-navigationlist-item-content .oj-navigationlist-item-label {
+    color: brown;
+}
+
+h1 {
+    font-size: 2.42857rem;
+    font-weight: 200;
+    color: brown;
+}
+
+.oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item:not(.oj-disabled) a.oj-tabbar-item-content .oj-tabbar-item-label {
+    color: brown;
+}
+
+.color-brown{
+    color: brown;
+}
+
+.oj-flex-item {
+    flex: auto;
+    box-sizing: border-box;
+    color: brown;
+}
+
+.oj-message-category{
+    display: none;
+    visibility: hidden;
+}
+
+.oj-message-header{
+    height: 15px;
+}
+
+.oj-selected > a.oj-navigationlist-item-content > .oj-navigationlist-item-label {
+    color: brown;
+}
+
+.oj-navigationlist-item.oj-selected {
+    border-color: brown;
+}
+
+.oj-navigationlist-item.oj-hover:not(.oj-selected) {
+    border-color: brown;
+}
+
+.oj-tabbar-horizontal.oj-tabbar-icon-only .oj-tabbar-item.oj-selected, .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected {
+    border-color: brown;
+}
 
 
+.accomodation-content-container{
+    align-items: flex-start;
+    padding-top: 50px;
+}
 
+#eventLink{
+    color: brown;
+}
 
-
-
-
-
-
-
-
-
+a:visited {
+    color: brown;
+}
 
 
 

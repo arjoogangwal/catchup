@@ -10,14 +10,6 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojarraydataprovider', 'partials/
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
-      self.buttonClick = function(event){
-        console.log("button clicked");
-        $.get('http://0.0.0.0:4000/show', function(responseText) {
-          console.log(responseText);
-        });
-        return true;
-      };
-
 
       //POST DIALOG REGION
       self.postButtonClick = function(event){
@@ -25,22 +17,71 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojarraydataprovider', 'partials/
       };
 
       self.closePostDialog = function (event) {
+        self.resetPostDialog();
         document.getElementById('modalDialog1').close();
       };
+
+      self.drillDownListHeading= ko.observable("Market Posts:");
 
       self.savePost = function (event) {
+        var successFunction = function(responseText){
+                  self.drillDownListVM.outerListData(responseText.data);
+                  self.drillDownListVM.outerListData.sort(function(a, b){
+                            return b.id-a.id;
+                        })
+                  self.closePostDialog();
+                }
 
-        //TODO -> Write code for saving post
-        document.getElementById('modalDialog1').close();
+                var data = {
+                    "address" : self.address(),
+                    "city" : self.postCity(),
+                    "title" : self.postTitle(),
+                    "description" : self.postDescription(),
+                    "state" : self.postState(),
+                    "zip" : self.postZip(),
+                    "price" : self.postPrice(),
+                    "condition" : self.condition(),
+                    "status" : self.status(),
+                    "category" : self.category(),
+                    "type" : self.type()
+                }
+
+                $.ajax({
+                    url: 'http://0.0.0.0:4000/postMarket',
+                    type: 'POST',
+                    data: data
+                })
+                .done(function(data) {
+                    successFunction(data);
+                });
+                return true;
       };
 
+      self.resetPostDialog = function(){
+            self.postDescription("");
+            self.type("SELL");
+            self.postTitle("");
+            self.postCity("");
+            self.postState("");
+            self.address("");
+            self.postZip("");
+            self.postPrice("");
+            self.category();
+            self.status();
+            self.condition();
+        }
+
       self.postDescription = ko.observable("");
+      self.type = ko.observable("SELL");
       self.postTitle = ko.observable("");
-        self.postCity = ko.observable("");
-        self.postState = ko.observable("");
-      self.postLocation = ko.observable("");
+      self.postCity = ko.observable("");
+      self.postState = ko.observable("");
+      self.address = ko.observable("");
       self.postZip = ko.observable("");
       self.postPrice = ko.observable("");
+      self.category = ko.observable();
+      self.status = ko.observable();
+      self.condition = ko.observable();
       self.drillDownListVM = new DrillDownList(self, "buySell");
 
     }
@@ -48,7 +89,7 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojarraydataprovider', 'partials/
    //region register partials
    ko.components
        .register(
-           "drilldownlist",
+           "marketdrilldownlist",
            {
              viewModel: {
                createViewModel: function (params,

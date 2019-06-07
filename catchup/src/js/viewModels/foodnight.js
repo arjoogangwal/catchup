@@ -11,21 +11,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
          function FoodAndNightLifeViewModel() {
            var self = this;
 
-           // Below are a set of the ViewModel methods invoked by the oj-module component.
-           // Please reference the oj-module jsDoc for additional information.
-
-           self.backToAllQuestionsList = function(event){
-             self.questionPosted(false);
-           };
-
 
            //Post Question text area and button REGION
            self.questionPosted = ko.observable(false);
            self.postedQuestionText = ko.observable("Your Posted Question");  // can be postQuestionVM.questionText()
-           self.postQuestionVM = new PostQuestion(self);
+           self.postQuestionVM = new PostQuestion(self, "FOOD AND NIGHTLIFE");
+           self.drillDownListHeading = ko.observable("Questions related to Food & Nightlife:");
 
            //Drill down list REGION
            self.drillDownListVM = new DrillDownList(self, "FOOD AND NIGHTLIFE");
+
+           self.postedQuestionText = self.postQuestionVM.questionText;
+
+
+
+
+        self.backToAllQuestionsList = function(event){
+            self.postQuestionVM.questionText("");
+            self.drillDownListVM.fetchData();
+            self.questionPosted(false);
+        };
+
+        self.updateQuestionsWithRelatedQuestions = function(relatedQuestions){
+            self.drillDownListVM.outerListData(relatedQuestions.data);
+            self.questionPosted(true);
+        }
 
          }
 

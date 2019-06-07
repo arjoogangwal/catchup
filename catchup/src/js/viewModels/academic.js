@@ -25,6 +25,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
         self.tabChangeHandler = function(event){
             if(event && event.detail && event.detail.previousKey!== event.detail.key && (event.detail.key === "courseWorkList" || event.detail.key === "hotSkillsList")){
               self.currentTab(event.detail.key);
+              self.postQuestionVM = new PostQuestion(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
               self.drillDownListVM = new DrillDownList(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
               if(self.currentTab()=="courseWorkList")
                 self.drillDownListHeading("Questions Related To Coursework:");
@@ -34,18 +35,26 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
                 
         };
 
-        self.backToAllQuestionsList = function(event){
-            self.questionPosted(false);
-        };
-
-
         //Post Question text area and button REGION
         self.questionPosted = ko.observable(false);
-        self.postedQuestionText = ko.observable("Your Posted Question");  // can be postQuestionVM.questionText()
         self.postQuestionVM = new PostQuestion(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
 
         //Drill down list REGION
         self.drillDownListVM = new DrillDownList(self, self.currentTab()=="courseWorkList" ? "COURSEWORK" : "HOT SKILLS");
+
+        self.postedQuestionText = self.postQuestionVM.questionText;
+
+
+        self.backToAllQuestionsList = function(event){
+            self.postQuestionVM.questionText("");
+            self.drillDownListVM.fetchData();
+            self.questionPosted(false);
+        };
+
+        self.updateQuestionsWithRelatedQuestions = function(relatedQuestions){
+            self.drillDownListVM.outerListData(relatedQuestions.data);
+            self.questionPosted(true);
+        }
 
     }
 

@@ -2,11 +2,13 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
+define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'jquery', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
   'ojs/ojoffcanvas',  'ojs/ojbutton',
         'ojs/ojmenu', 'ojs/ojoption',
+        'ojs/ojinputtext', 'ojs/ojlabel',
+        'ojs/ojradioset', 'ojs/ojselectcombobox',
         'ojs/ojdialog', 'ojs/ojselectcombobox', 'ojs/ojdefer', 'ojs/ojmessages', 'ojs/ojarraydataprovider'],
-  function(oj, ko, moduleUtils) {
+  function(oj, ko, moduleUtils, $) {
      function ControllerViewModel() {
 
          var self = this;
@@ -96,10 +98,96 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
         new footerLink('Your Privacy Rights', 'yourPrivacyRights', 'http://www.oracle.com/us/legal/privacy/index.html')
       ]);
 
+      self.loggedIn = ko.observable(false);
+
+      self.loginUsername = ko.observable("");
+      self.loginPassword = ko.observable("");
+      self.userType = ko.observable("ALUMNI");
+      self.username = ko.observable("");
+      self.password = ko.observable("");
+      self.city = ko.observable("");
+      self.state = ko.observable("");
+      self.zip = ko.observable("");
+      self.address = ko.observable("");
+      self.program = ko.observable("");
+      self.firstName = ko.observable("");
+      self.lastName = ko.observable("");
+      self.repassword = ko.observable("");
+      self.phone = ko.observable("");
+      self.email = ko.observable("");
+      self.undergrad = ko.observable("");
+
+      self.loginDialog = function(event)
+         {
+
+self.signUpShowing(false);
+            document.getElementById("loginDialog").open();
+         };
+
+      self.closeLoginDialog = function (event) {
+              self.reset();
+              self.signUpShowing(false);
+              
+              document.getElementById('loginDialog').close();
+           };
+
+           self.reset = function(){
+            self.loginUsername("");
+      self.loginPassword("");
+      self.userType ("ALUMNI");
+      self.username ("");
+      self.password("");
+      self.city("");
+      self.state ("");
+      self.zip ("");
+      self.address ("");
+      self.program ("");
+      self.firstName ("");
+      self.lastName ("");
+      self.repassword("");
+      self.phone("");
+      self.email ("");
+      self.undergrad("");
+           }
+
+           self.signUpShowing = ko.observable(false);
+
+           self.signUpClicked = function(event)
+         {
+          self.reset();
+
+            self.signUpShowing(true);
+         };
+
+         self.signUpConfirm = function(event)
+         {
+          self.reset();
+
+            self.signUpShowing(false);
+         };
+
+
+
+      self.login = function (event) {
+
+            self.loggedIn(true);
+            self.reset();
+              
+              document.getElementById('loginDialog').close();
+           };
+
+      self.goToHome = function( data, event) {
+          if(event && event.target && (event.target.id === "scuIconContainer" || event.target.id === "scuIconContainerIcon" || event.target.id === "scuIconContainerText")){
+              self.router.go('home');
+          }
+      }.bind(this);
+
       self.menuItemAction = function( event ) {
           if(event && event.target && event.target.value === "msg"){
               self.openMessagesDialog();
-
+          }
+          if(event && event.target && event.target.value === "out"){
+              self.loggedIn(false);
           }
 
       }.bind(this);
@@ -107,27 +195,29 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
       //Messages Dialog region
 
          // TODO -> Fetch real time messages from the server
-         self.applicationMessages = [
-             {
-                 "severity": "error",
-                 "summary": "Error message summary",
-                 "detail": "Error message detail",
-                 "closeAffordance": "none"
-             },
-             {
-                 "severity": "error",
-                 "summary": "Warning message summary",
-                 "detail": "Warning message detail",
-                 "closeAffordance": "none"
-             }
-         ];
+         self.applicationMessages = ko.observableArray();
+
          self.dataprovider = new oj.ArrayDataProvider(self.applicationMessages);
 
          self.openMessagesDialog = function(event)
          {
              // self.selectedLayoutOption("inline");
-             document.getElementById("messagesContainerDialog").open();
+             var url = 'http://0.0.0.0:4000/messages';
+                $.get(url, function(responseText) {
+                    self.applicationMessages(responseText.data);
+                    self.applicationMessages.sort(function(a, b){
+                            return b.response_id-a.response_id;
+                        })
+                    
+                    document.getElementById("messagesContainerDialog").open();
+                });
+                
          };
+
+         this.messagesReady = function(event) {
+              if($( "div.oj-message-detail a:last-child" ).length == 0)             
+                  $('div.oj-message-detail').append("<br><a href='#''>Resume</a>");
+           }.bind(this);
 
          self.closeMessagesDialog = function(event)
          {

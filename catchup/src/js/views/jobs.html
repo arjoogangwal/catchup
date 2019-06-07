@@ -1,10 +1,10 @@
 <div class="oj-hybrid-padding module-content-container">
    <h1>
-   <img slot="startIcon"
+   Job Opportunities
+<img slot="startIcon"
                           src="css/images/jobss.png"
                           alt="bulleted list image"
-                          width="30" height="26"/>
-                       Job Opportunities</h1>
+                          width="30" height="30"/></h1>
 <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
    <div id="tabbarcontainer">
       <oj-tab-bar
@@ -26,17 +26,17 @@
          </ul>
          <!-- ko if: currentTab() === "onCampus" && !questionPosted() -->
          <div id="coursework">
-            <div id="accomodationContentContainer" class="flex-bar" style="padding-top: 50px;">
+            <div id="accomodationContentContainer" class="flex-bar accomodation-content-container">
                <div class="demo-padding flex-column grow align-stretch">
-                  <div class="oj-flex-bar" style="max-width: 50%;">
-                     <jobspostquestion class="oj-flex-bar-start flex-column flex-column overflow-hidden grow" ></jobspostquestion>
-                     <h4>
-                      SCU JOBS
-                   <img slot="startIcon"
-                          src="css/images/market.png"
+                  <div class="oj-flex-bar" style="width: 100%; max-width: 90%;">
+                     <jobspostquestion style="max-width: 30%; margin-left: 30%;" class="oj-flex-bar-middle flex-column" ></jobspostquestion>
+                     <div onclick="window.open('https://www.scu.edu/hr/student-employees/job-listings/', '_blank');" class="oj-flex-bar-end" style="cursor: pointer;">
+                        <img slot="startIcon"
+                          src="css/images/scu1.png"
                           alt="bulleted list image"
-                          width="26" height="26"/>
-                       </h4>
+                          width="40" height="40"/>
+                          <h4 style="padding-left: 10px;">SCU JOBS</h4>
+                     </div>
                   </div>
                   <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
                      <div id="listviewContainer" class="demo-container">
@@ -77,53 +77,38 @@
                   <div class='oj-flex-bar'>
                      <div class='oj-flex-bar-start'>
                         <oj-label id="mainlabelid"
-                           class="oj-label-inline">Post Type</oj-label>
+                           class="oj-label-inline">Job Category</oj-label>
                      </div>
                      <div class='oj-flex-bar-middle'>
-                        <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row">
-                           <oj-option id="buy" value="rock">Buy</oj-option>
-                           <oj-option id="sell" value="boarding">Sell</oj-option>
+                        <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row" value="{{jobCategory}}">
+                           <oj-option id="fulltime" value="FULL TIME">Full Time</oj-option>
+                           <oj-option id="intern" value="INTERNSHIP">Internship</oj-option>
+                           <oj-option id="parttime" value="PART TIME">Part Time</oj-option>
                         </oj-radioset>
                      </div>
                   </div>
-                  <div>
-                     <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Title" value="{{postTitle}}">
-                     </oj-text-area>
-                  </div>
-                  <div>
-                     <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{postDescription}}">
-                     </oj-text-area>
-                  </div>
                   <div id="postForm" style="width: 1px; min-width: 100%;">
                      <div class="oj-form" >
-                        <oj-input-text id="location" placeholder="Address" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
-                        <oj-input-text id="city" placeholder="City" value="{{postCity}}" style="max-width:49%"></oj-input-text>
-                        <oj-input-text id="state" placeholder="State" value="{{postState}}" style="max-width:49%"></oj-input-text>
-                        <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
-                        <oj-label for="price" class="oj-label-inline">$</oj-label>
-                        <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
-                        <oj-select-one id="conditionSelect" required="true"
-                           placeholder="Condition"
-                           style="max-width:20em">
-                           <oj-option value="FAIR">Fair</oj-option>
-                           <oj-option value="NEW">New</oj-option>
-                           <oj-option value="EXCELLENT">Excellent</oj-option>
-                           <oj-option value="GOOD">Good</oj-option>
-                           <oj-option value="LIKE NEW">Like New</oj-option>
-                        </oj-select-one>
+                        <oj-input-text id="company_name" placeholder="Company Name" value="{{companyName}}" style="max-width:49%"></oj-input-text>
+                        <oj-input-text id="position" placeholder="Title" value="{{position}}" style="max-width:49%"></oj-input-text>
+                        <oj-text-area style="max-width:100%;" id="text-area" placeholder="Job Description" value="{{jobDescription}}">
+                        </oj-text-area>
+                        <oj-input-text id="location" placeholder="Location" value="{{location}}" style="max-width:49%"></oj-input-text>
+                        <oj-input-text id="experience" placeholder="Experience Required" value="{{experience}}" style="max-width:49%"></oj-input-text>
                      </div>
                   </div>
                </div>
                <div slot="footer">
-                  <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                  <oj-button id="postButton" on-oj-action="[[savePost]]">POST
                   </oj-button>
                   <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
                   </oj-button>
                </div>
             </oj-dialog>
+            <h4 data-bind="text: 'Industry Job Posts:'"></h4>
             <div id="listviewContainer" class="demo-container">
                <oj-list-view id="listview" aria-label="drill down list"
-                  data="[[industryJobsDataProvider]]" selection-mode="single">
+                  data="[[industryJobsDataProvider]]" selection-mode="single" on-current-item-changed="[[handleCurrentItemChanged]]" >
                   <template slot="itemTemplate">
                      <div class="container oj-flex-bar">
                         <div class="flex-column oj-flex-bar-middle">
@@ -135,6 +120,14 @@
                            <div>
                               <span class="oj-flex-item">
                                  <oj-bind-text value="[[$current.data.position]]"></oj-bind-text>
+                              </span>
+                           </div>
+                           <div>
+                              <span class="oj-text-xs">
+                              Job Type : 
+                              </span>
+                              <span class="oj-text-xs oj-text-secondary-color">
+                                 <oj-bind-text value="[[$current.data.category]]"></oj-bind-text>
                               </span>
                            </div>
                            <div>
@@ -182,7 +175,7 @@
                               "of": "window"}'>
                               <div slot="body" id="componentReferralContent" style="width: 1px; min-width: 100%;">
                                  <div id="parentContainer" style="padding:10px">
-                                    <h5>Message to Your Contact</h5>
+                                    <h5>Message to Job Poster</h5>
                                     <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Message" value="{{referralMessage}}">
                                     </oj-text-area>
                                     <h5>Attach Resume</h5>

@@ -27,7 +27,7 @@ define(
 
             self.postButtonClick = function(event){
                 var successFunction = function(data){
-                    self.parentVM.questionPosted(true);
+                    self.parentVM.updateQuestionsWithRelatedQuestions(data);
                 }
 
                 var data = {
@@ -41,7 +41,7 @@ define(
                     data: data
                 })
                 .done(function(data) {
-                    successFunction();
+                    successFunction(data);
                 });
                 //TODO -> navigate to related questions list after clicking post
                 return true;

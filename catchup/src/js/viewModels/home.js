@@ -16,6 +16,13 @@ define(['ojs/ojcore', 'knockout', 'jquery','ojs/ojrouter'],
         return true;
       }
 
+      self.chatButtonClick = function(event){
+        var url = 'http://0.0.0.0:4000/chat';
+                $.get(url, function(responseText) {
+                    
+                });
+      }
+
       /**
        * Optional ViewModel method invoked after the View is inserted into the
        * document DOM.  The application can put logic that requires the DOM being

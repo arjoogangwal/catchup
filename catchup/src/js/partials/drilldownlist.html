@@ -124,7 +124,9 @@
                 <!-- /ko -->
             </template>
         </oj-list-view>
-        <div class="oj-flex-bar" style="padding-top:20px;">
+        <div class="flex-column" style="padding-top:20px;">
+            <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Reply" value="{{replyText}}">                 
+            </oj-text-area>
             <oj-button class='oj-button-sm oj-flex-bar-end' id="buttonIcon2" on-oj-action="[[replyToPost]]">
                 Reply
             </oj-button>

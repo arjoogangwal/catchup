@@ -31,23 +31,26 @@
     <div id="globalBody" class="oj-offcanvas-outer-wrapper oj-offcanvas-page">
       <div id="pageContent" class="oj-web-applayout-page" >
         <header role="banner" class="oj-web-applayout-header">
-          <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center">
+          <div class="oj-web-applayout-max-width oj-flex-bar oj-sm-align-items-center" style="max-width: 100%;">
             <!-- Offcanvas toggle button -->
-            <div class="oj-flex-bar-start oj-sm-align-items-baseline">
-              <span role="img" class="oj-icon scu-icon"  style="width: 80px;height: 80px;" title="SCU logo" alt="SCU Logo"></span>
-              <h1 class="oj-web-applayout-header-title" style="margin: auto;padding-left: 10px;FONT-SIZE: x-large;FONT-FAMILY: fantasy;" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text>
+            <div id="scuIconContainer" class="oj-flex-bar-start oj-sm-align-items-baseline" data-bind="click: goToHome" style="cursor: pointer;">
+              <span id="scuIconContainerIcon" role="img" class="oj-icon scu-icon"  style="width: 80px;height: 80px;" title="SCU logo" alt="SCU Logo"></span>
+              <h1 id="scuIconContainerText" class="oj-web-applayout-header-title" style="margin: auto;padding-left: 10px;FONT-SIZE: x-large;FONT-FAMILY: sans-serif;" title="Application Name"><oj-bind-text value="[[appName]]"></oj-bind-text>
               </h1>
             </div>
             <div class="oj-flex-bar-end">
               <!-- Responsive Toolbar -->
               <oj-toolbar>
-                <oj-menu-button id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="half">
-                  <span><oj-bind-text value="[[userLogin]]"></oj-bind-text></span>
+                Welcome,
+                <oj-button data-bind="visible:!loggedIn()" on-oj-action="[[loginDialog]]">Login</oj-button>
+                <oj-menu-button data-bind="visible:loggedIn" id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="half">
+                  <span style="    FONT-SIZE: small;"><oj-bind-text  value="[[userLogin]]"></oj-bind-text></span>
                   <span slot="endIcon" :class="[[{'oj-icon demo-appheader-avatar': smScreen(), 'oj-component-icon oj-button-menu-dropdown-icon': !smScreen()}]]"></span>
                   <oj-menu id="menu1" slot="menu" style="display:none" on-oj-action="[[menuItemAction]]">
-                    <oj-option id="prof" value="pref">Profile</oj-option>
-                    <oj-option id="posts" value="help">Posts</oj-option>
+                    <oj-option id="messages" value="profile">Profile</oj-option>
+                    <oj-option id="out" value="posts">Posts</oj-option>
                     <oj-option id="messages" value="msg">Messages</oj-option>
+                    <oj-option id="out" value="Settings">Settings</oj-option>
                     <oj-option id="out" value="out">Sign Out</oj-option>
                   </oj-menu>
                 </oj-menu-button>
@@ -67,14 +70,9 @@
 
                       <!-- Messages -->
                       <oj-messages id="messages-id" messages="{{dataprovider}}"
-                                   display="[[messagesDisplay]]" position="[[messagesPosition]]"
+                                   display="[[messagesDisplay]]" position="[[messagesPosition]]" on-oj-animate-end='[[messagesReady]]'
                                    :style="[[messagesStyle]]">
                       </oj-messages>
-
-                      <!-- Content -->
-                      <div id="content" role="main" class="oj-sm-padding-2x-top">
-                      </div>
-
                     </oj-defer>
                   </div>
 
@@ -87,6 +85,158 @@
                   </div>
 
                 </oj-dialog>
+
+                <oj-dialog style="display:none; width:40vw; height:60vh;" id="loginDialog" dialog-title="Sign In"
+               position='{"my": {"vertical":"center", "horizontal": "center"},
+               "at": {"vertical": "center", "horizontal": "center"},
+               "offset" : {"x" : "20"},
+               "of": "window"}'>
+               <div slot="body">
+                <!-- ko if: !signUpShowing() -->
+                  <div id="postForm" style="width: 1px; min-width: 100%;">
+                     <div class="oj-form" >
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Enter Username: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="company_name" placeholder="Username" value="{{loginUsername}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Enter Password: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-password id="position" placeholder="Password" value="{{loginPassword}}" ></oj-input-password>
+                     </div>
+                  </div>
+                      </div>
+                  </div>
+               </div>
+               <!-- /ko -->
+               <!-- ko if: signUpShowing() -->
+               <div id="postForm" style="width: 1px; min-width: 100%;">
+                     <div class="oj-form" >
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">First Name: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="company_name" placeholder="First Name" value="{{firstName}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Last Name: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="company_name" placeholder="Last Name" value="{{lastName}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">User Type:</oj-label>
+                     </div>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row" value="{{userType}}">
+                           <oj-option id="fulltime" value="FULL TIME">Current Student</oj-option>
+                           <oj-option id="intern" value="INTERNSHIP">Incoming Student</oj-option>
+                           <oj-option id="parttime" value="ALUMNI">Alumni</oj-option>
+                        </oj-radioset>
+                     </div>
+                  </div>
+                  <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Email: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="company_name" placeholder="Email" value="{{email}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Address: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="company_name" placeholder="Address" value="{{address}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                      <oj-input-text id="company_name" placeholder="City" value="{{city}}" style="max-width:49%"></oj-input-text>
+                        <oj-input-text id="position" placeholder="State" value="{{state}}" style="max-width:49%"></oj-input-text>
+                        <oj-input-text id="position" placeholder="Zip" value="{{zip}}" style="max-width:49%"></oj-input-text>
+                        <oj-input-text id="position" placeholder="Phone" value="{{phone}}" style="max-width:49%"></oj-input-text>
+                        <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Username: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="position" placeholder="Username" value="{{username}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Enter Password: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-password id="position" placeholder="Password" value="{{password}}" ></oj-input-password>
+                     </div>
+                  </div>
+                      </div>
+                      <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Confirm Password: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-password id="position" placeholder="Confirm Password" value="{{repassword}}" ></oj-input-password>
+                     </div>
+                  </div>
+                      </div>
+                      <oj-select-one id="conditionSelect" required="true"
+                                           placeholder="Program" value="{{program}}" 
+                                           style="max-width:20em">
+                                <oj-option value="FAIR">Masters in Information Systems</oj-option>
+                                <oj-option value="NEW">Masters in Finance</oj-option>
+                                <oj-option value="EXCELLENT">Masters in Business Analytics</oj-option>
+                            </oj-select-one>
+                            <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Undergrad Degree: </oj-label>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-input-text id="position" placeholder="Undergrad Degree" value="{{undergrad}}" ></oj-input-text>
+                     </div>
+                  </div>
+                      </div>
+                  </div>
+               </div>
+
+               <!-- /ko -->
+             </div>
+               <div slot="footer">
+                <!-- ko if: !signUpShowing() -->
+                <oj-button id="postButton" on-oj-action="[[signUpClicked]]">SIGN UP
+                  </oj-button>
+                  <oj-button id="postButton" on-oj-action="[[login]]">LOGIN
+                  </oj-button>
+                  <oj-button id="closePostButton" on-oj-action="[[closeLoginDialog]]">CANCEL
+                  </oj-button>
+                  <!-- /ko -->
+                  <!-- ko if: signUpShowing() -->
+                  <oj-button id="postButton" on-oj-action="[[signUpConfirm]]">CONFIRM
+                  </oj-button>
+                  <oj-button id="closePostButton" on-oj-action="[[closeLoginDialog]]">CANCEL
+                  </oj-button>
+                  <!-- /ko -->
+               </div>
+            </oj-dialog>
               </oj-toolbar>
             </div>
           </div>
@@ -94,7 +244,7 @@
 
         <div id="contentContainer" class="flex-bar grow align-stretch" style="height: calc(100vh - 100px);">
           <div role="navigation" class="flex-column">
-            <oj-navigation-list class="oj-sm-only-hide oj-md-condense oj-md-justify-content-flex-end"
+            <oj-navigation-list data-bind="visible:loggedIn" class="oj-sm-only-hide oj-md-condense oj-md-justify-content-flex-end"
                                 data="[[navDataSource]]"
                                 edge="start"
                                 item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('navTemplate', true)]]"

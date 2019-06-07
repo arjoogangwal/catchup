@@ -1,20 +1,30 @@
 <div class="oj-hybrid-padding module-content-container flex-container">
-    <h1>
-    <img slot="startIcon"
+    <div class="flex-bar">
+    <h1 style="padding-right: 10px;">Events</h1>
+        <img slot="startIcon"
                           src="css/images/events.png"
                           alt="bulleted list image"
-                          width="26" height="26"/>
-                      Events</h1>
-    <div id="accomodationContentContainer" class="flex-bar">
+                          width="30" height="30"/>
+
+    </div>
+
+    <div id="accomodationContentContainer" class="flex-bar accomodation-content-container">
 
         <div id="contents" style="width: 100%; max-width: 100%;" class="demo-padding demo-container flex-column  grow align-stretch">
             <div class="oj-flex-bar">
-                <oj-button on-oj-action='[[postButtonClick]]' class='oj-button-sm oj-flex-bar-end' style="width: 200px; max-width: 200px;" chroming='full'>
+                <oj-button on-oj-action='[[postButtonClick]]' class='oj-button-sm oj-flex-bar-start' style="width: 200px; max-width: 200px;" chroming='full'>
                     Post
                 </oj-button>
+                <div onclick="window.open('https://www.scu.edu/events/', '_blank');" class="oj-flex-bar-end" style="cursor: pointer;">
+                        <img slot="startIcon"
+                          src="css/images/scu1.png"
+                          alt="bulleted list image"
+                          width="40" height="40"/>
+                          <h4 style="padding-left: 10px;">SCU Events</h4>
+                     </div>
             </div>
 
-            <oj-dialog style="display:none; width:40vw; height:60vh;" id="modalDialog1" dialog-title="Post a new listing"
+            <oj-dialog style="display:none; width:40vw; height:60vh;" id="modalDialog1" dialog-title="Post a new Event"
                        position='{"my": {"vertical":"center", "horizontal": "center"},
                                 "at": {"vertical": "center", "horizontal": "center"},
                                 "offset" : {"x" : "20"},
@@ -23,14 +33,14 @@
                     <div class='oj-flex-bar'>
                         <div class='oj-flex-bar-start'>
                             <oj-label id="mainlabelid"
-                                      class="oj-label-inline">Post Type</oj-label>
+                                      class="oj-label-inline">Event Type</oj-label>
                         </div>
                         <div class='oj-flex-bar-middle'>
                             <!-- You need to set the labelled-by attribute to make
                             this accessible. -->
-                            <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row">
-                                <oj-option id="buy" value="rock">Buy</oj-option>
-                                <oj-option id="sell" value="boarding">Sell</oj-option>
+                            <oj-radioset labelled-by="mainlabelid" value="{{postType}}" class="oj-choice-direction-row">
+                                <oj-option id="buy" value="SCU">SCU</oj-option>
+                                <oj-option id="sell" value="OUTSIDE SCU">Outside SCU</oj-option>
                             </oj-radioset>
                         </div>
                     </div>
@@ -44,29 +54,20 @@
                     </div>
                     <div id="postForm" style="width: 1px; min-width: 100%;">
                         <div class="oj-form" >
-
-                            <oj-input-text id="location" placeholder="Address" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
+                            <oj-input-text id="date" placeholder="Date" value="{{postDate}}" style="max-width:49%"></oj-input-text>
+                            <oj-label for="price" class="oj-label-inline">$</oj-label>
+                            <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
+                            <oj-input-text id="url" placeholder="Url" value="{{postUrl}}" style="max-width:49%"></oj-input-text>
+                            <oj-input-text id="address" placeholder="Address" value="{{postAddress}}" style="max-width:49%"></oj-input-text>
                             <oj-input-text id="city" placeholder="City" value="{{postCity}}" style="max-width:49%"></oj-input-text>
                             <oj-input-text id="state" placeholder="State" value="{{postState}}" style="max-width:49%"></oj-input-text>
                             <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
-
-
-                            <oj-label for="price" class="oj-label-inline">$</oj-label>
-                            <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
-                            <oj-select-one id="conditionSelect" required="true"
-                                           placeholder="Condition"
-                                           style="max-width:20em">
-                                <oj-option value="FAIR">Fair</oj-option>
-                                <oj-option value="NEW">New</oj-option>
-                                <oj-option value="EXCELLENT">Excellent</oj-option>
-                                <oj-option value="GOOD">Good</oj-option>
-                                <oj-option value="LIKE NEW">Like New</oj-option>
-                            </oj-select-one>
+                            
                         </div>
                     </div>
                 </div>
                 <div slot="footer">
-                    <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                    <oj-button id="postButton" on-oj-action="[[savePost]]">POST
                     </oj-button>
                     <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
                     </oj-button>
@@ -74,6 +75,7 @@
             </oj-dialog>
 
             <div id="listviewContainer" class="demo-container">
+                <h4 data-bind="text: 'All Events:'"></h4>
     <oj-list-view id="listview" aria-label="drill down list"
                   data="[[dataProvider]]" selection-mode="single">
         <template slot="itemTemplate">
@@ -88,32 +90,32 @@
                             <oj-bind-text value="[[$current.data.type]]"></oj-bind-text>
                         </span>
                     </div>
-                     <div>
-                        <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;">
-                            <oj-bind-text value="[[$current.data.date]]"></oj-bind-text>
-                        </span>
-                    </div>
                     <div>
-                        <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;">
+                        <span class="oj-text-xs oj-text-secondary-color" style="white-space: normal;color: black;font-size: small;font-style: italic;">
                             <oj-bind-text value="[[$current.data.description]]"></oj-bind-text>
                         </span>
                     </div>
                     <div>
                         <span class="oj-flex-item">
+                            <oj-bind-text value="[[$current.data.date]]"></oj-bind-text>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="oj-flex-item" style="color: black;">
                             <oj-bind-text value="[[$current.data.address]]"></oj-bind-text>
                         </span>
-                        <span class="oj-flex-item">
+                        <span class="oj-flex-item" style="color: black;">
                             <oj-bind-text value="[[$current.data.city]]"></oj-bind-text>
                         </span>
-                        <span class="oj-flex-item">
+                        <span class="oj-flex-item" style="color: black;">
                             <oj-bind-text value="[[$current.data.state]]"></oj-bind-text>
                         </span>
-                        <span class="oj-flex-item">
+                        <span class="oj-flex-item" style="color: black;">
                             <oj-bind-text value="[[$current.data.zip]]"></oj-bind-text>
                         </span>
                     </div>
                     <div>
-                        Go To: <a class="oj-flex-item">
+                        Go To: <a id="eventLink" data-bind="attr: { href: $current.data.url}" class="oj-flex-item">
                             <oj-bind-text value="[[$current.data.url]]"></oj-bind-text>
                         </a>
                     </div>

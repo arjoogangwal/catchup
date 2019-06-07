@@ -32,18 +32,31 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
              }
            };
 
-           self.backToAllQuestionsList = function(event){
-             self.questionPosted(false);
-           };
+           self.postQuestionVM = new PostQuestion(self, "ON_CAMPUS");
+
+           self.drillDownListHeading= ko.observable("Questions related to On Campus Jobs:");
+
+           //Drill down list REGION
+           self.drillDownListVM = new DrillDownList(self, "ON_CAMPUS");
+
+           self.postedQuestionText = self.postQuestionVM.questionText;
+
+
+        self.backToAllQuestionsList = function(event){
+            self.postQuestionVM.questionText("");
+            self.drillDownListVM.fetchData();
+            self.questionPosted(false);
+        };
+
+        self.updateQuestionsWithRelatedQuestions = function(relatedQuestions){
+            self.drillDownListVM.outerListData(relatedQuestions.data);
+            self.questionPosted(true);
+        }
 
 
            //Post Question text area and button REGION
            self.questionPosted = ko.observable(false);
-           self.postedQuestionText = ko.observable("Your Posted Question");  // can be postQuestionVM.questionText()
-           self.postQuestionVM = new PostQuestion(self);
-
-           //Drill down list REGION
-           self.drillDownListVM = new DrillDownList(self, "ON_CAMPUS");
+           
 
 
 
@@ -54,11 +67,20 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
                 $.get(url, function(responseText) {
                     console.log(responseText.data);
                     self.industryJobs(responseText.data);
+                    self.industryJobs.sort(function(a, b){
+                            return b.id-a.id;
+                        })
                 });
             }
             
 
-           self.selectedIndustryJobItems = ko.observableArray([]);
+           self.selectedIndustryJobItem = ko.observable();
+
+           this.handleCurrentItemChanged = function(event){
+              var itemId = event.detail.value;
+              // Access current item via ui.item
+              this.selectedIndustryJobItem(itemId);
+            }.bind(this);
 
            var lastItemId = self.industryJobs().length;
 
@@ -70,22 +92,55 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
            };
 
            self.closePostDialog = function (event) {
-             document.getElementById('modalDialog1').close();
+              self.resetPostDialog();
+              document.getElementById('modalDialog1').close();
            };
 
            self.savePost = function (event) {
+              var successFunction = function(responseText){
+                  self.industryJobs(responseText.data);
+                  self.industryJobs.sort(function(a, b){
+                            return b.id-a.id;
+                        })
+                  self.closePostDialog();
+                }
 
-             //TODO -> Write code for saving post
-             document.getElementById('modalDialog1').close();
+                var data = {
+                    "company_name" : self.companyName(),
+                    "position" : self.position(),
+                    "description" : self.jobDescription(),
+                    "location" : self.location(),
+                    "experience" : self.experience(),
+                    "job_category" : self.jobCategory()
+                }
+
+                $.ajax({
+                    url: 'http://0.0.0.0:4000/postJob',
+                    type: 'POST',
+                    data: data
+                })
+                .done(function(data) {
+                    successFunction(data);
+                });
+                return true;
            };
 
-           self.postDescription = ko.observable("");
-           self.postTitle = ko.observable("");
-           self.postCity = ko.observable("");
-           self.postState = ko.observable("");
-           self.postLocation = ko.observable("");
-           self.postZip = ko.observable("");
-           self.postPrice = ko.observable("");
+           self.jobCategory = ko.observable("FULL TIME");
+
+           self.jobDescription = ko.observable("");
+           self.companyName = ko.observable("");
+           self.position = ko.observable("");
+           self.location = ko.observable("");
+           self.experience = ko.observable("");
+
+           self.resetPostDialog = function(){
+              self.jobCategory("FULL TIME");
+              self.jobDescription("");
+              self.companyName("");
+              self.position("");
+              self.location("");
+              self.experience("");
+           }
 
            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>> RGEION END POST DIALOG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -103,9 +158,24 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'partials/postQuestion', 'partials/d
            };
 
            self.saveReferral= function (event) {
+              var successFunction = function(responseText){
+                  self.closeReferralDialog();
+                }
 
-             //TODO -> Write code for saving post
-             document.getElementById('referralDialog').close();
+                var data = {
+                    "job_id" : self.selectedIndustryJobItem(),
+                    "message" : self.referralMessage()
+                }
+
+                $.ajax({
+                    url: 'http://0.0.0.0:4000/jobResponse',
+                    type: 'POST',
+                    data: data
+                })
+                .done(function(data) {
+                    successFunction(data);
+                });
+                return true;
            };
 
            self.fileNames = ko.observableArray([]);

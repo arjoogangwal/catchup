@@ -29,6 +29,16 @@ define(
                 var url = self.type === "buySell" ? 'http://0.0.0.0:4000/market' : 'http://0.0.0.0:4000/questions?category=' + self.type;
                 $.get(url, function(responseText) {
                     self.outerListData(responseText.data);
+
+                    if(self.type === "buySell"){
+                        self.outerListData.sort(function(a, b){
+                            return b.id-a.id;
+                        })
+                    }else{
+                        self.outerListData.sort(function(a, b){
+                            return b.question_id-a.question_id;
+                        })
+                    }
                 });
             }
 
@@ -69,7 +79,6 @@ define(
                         var repliesUrl = 'http://0.0.0.0:4000/replies?questionId=' + row.question_id;
                     }
                     $.get(repliesUrl, function(responseText) {
-                        console.log(responseText.data);
                         self.internalListData(responseText.data);
                         self.slide();
                     });
@@ -87,8 +96,29 @@ define(
             self.internalListDataProvider = new ArrayDataProvider(self.internalListData, {'keyAttributes': 'response_id'});
             self.selectedItems = ko.observableArray([]);
 
+
+            self.replyText = ko.observable("");
+
             self.replyToPost = function(event){
-                // document.getElementById('modalDialog1').open();
+                var successFunction = function(responseText){
+                  self.internalListData(responseText.data);
+                  self.replyText("");
+                }
+
+                var data = {
+                    "question_id" : self.currentListItemSelectedId(),
+                    "reply" : self.replyText()
+                }
+
+                $.ajax({
+                    url: self.type === "buySell" ? 'http://0.0.0.0:4000/marketResponse' : 'http://0.0.0.0:4000/questionResponse',
+                    type: 'POST',
+                    data: data
+                })
+                .done(function(data) {
+                    successFunction(data);
+                });
+                return true;
             };
 
             var lastItemId = self.internalListData().length;

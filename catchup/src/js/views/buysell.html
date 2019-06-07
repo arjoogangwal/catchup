@@ -1,16 +1,11 @@
 <div class="oj-hybrid-padding module-content-container flex-container">
-    <h1>
-    <img slot="startIcon"
+    <div class="flex-bar">
+        <h1 style="padding-right: 10px;">Buy/Sell</h1>
+                  <img slot="startIcon"
                           src="css/images/market.png"
                           alt="bulleted list image"
-                          width="26" height="26"/>
-                      Buy/Sell</h1>
-    <div id="accomodationContentContainer" class="flex-bar">
-       <!-- <div id="iframe" style="" class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
-            <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
-            </iframe>
-        </div>-->
-
+                          width="30" height="36"/></div>
+    <div id="accomodationContentContainer" class="flex-bar accomodation-content-container">
 
         <div id="contents" style="" class="demo-padding demo-container flex-column  grow align-stretch">
             <div class="oj-flex-bar">
@@ -33,9 +28,9 @@
                         <div class='oj-flex-bar-middle'>
                             <!-- You need to set the labelled-by attribute to make
                             this accessible. -->
-                            <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row">
-                                <oj-option id="buy" value="rock">Buy</oj-option>
-                                <oj-option id="sell" value="boarding">Sell</oj-option>
+                            <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row" value="{{type}}">
+                                <oj-option id="buy" value="BUYING">Buy</oj-option>
+                                <oj-option id="sell" value="SELLING">Sell</oj-option>
                             </oj-radioset>
                         </div>
                     </div>
@@ -50,7 +45,7 @@
                     <div id="postForm" style="width: 1px; min-width: 100%;">
                         <div class="oj-form" >
 
-                            <oj-input-text id="location" placeholder="Address" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
+                            <oj-input-text id="address" placeholder="Address" value="{{address}}" style="max-width:49%"></oj-input-text>
                             <oj-input-text id="city" placeholder="City" value="{{postCity}}" style="max-width:49%"></oj-input-text>
                             <oj-input-text id="state" placeholder="State" value="{{postState}}" style="max-width:49%"></oj-input-text>
                             <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
@@ -58,8 +53,9 @@
 
                             <oj-label for="price" class="oj-label-inline">$</oj-label>
                             <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
+
                             <oj-select-one id="conditionSelect" required="true"
-                                           placeholder="Condition"
+                                           placeholder="Condition" value="{{condition}}" 
                                            style="max-width:20em">
                                 <oj-option value="FAIR">Fair</oj-option>
                                 <oj-option value="NEW">New</oj-option>
@@ -67,11 +63,26 @@
                                 <oj-option value="GOOD">Good</oj-option>
                                 <oj-option value="LIKE NEW">Like New</oj-option>
                             </oj-select-one>
+                            <oj-select-one id="status" required="true"
+                                           placeholder="Status" value="{{status}}" 
+                                           style="max-width:20em">
+                                <oj-option value="SOLD">Sold</oj-option>
+                                <oj-option value="NOT SOLD">Not Sold</oj-option>
+                            </oj-select-one>
+                            <oj-select-one id="category" required="true"
+                                           placeholder="Category" value="{{category}}" 
+                                           style="max-width:20em">
+                                <oj-option value="FURNITURE">Furniture</oj-option>
+                                <oj-option value="ELECTRONICS & COMPUTER">Electronics & Computer</oj-option>
+                                <oj-option value="HOUSEHOLD">Household</oj-option>
+                                <oj-option value="BOOKS">Books</oj-option>
+                                <oj-option value="MISCELLANEOUS">Miscellaneous</oj-option>
+                            </oj-select-one>
                         </div>
                     </div>
                 </div>
                 <div slot="footer">
-                    <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                    <oj-button id="postButton" on-oj-action="[[savePost]]">POST
                     </oj-button>
                     <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
                     </oj-button>
@@ -79,7 +90,7 @@
             </oj-dialog>
 
                 <div id="listviewContainer" class="demo-container">
-                    <drilldownlist class="flex-column flex-column overflow-hidden grow" ></drilldownlist>
+                    <marketdrilldownlist class="flex-column flex-column overflow-hidden grow" ></marketdrilldownlist>
 
                 </div>
         </div>

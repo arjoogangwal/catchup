@@ -1,11 +1,12 @@
 
 <div class="oj-hybrid-padding module-content-container">
-  <h1>
-  <img slot="startIcon"
+  <div class="flex-bar">
+    <h1 style="padding-right: 10px;">Academic Guidance</h1> 
+                      <img slot="startIcon"
                           src="css/images/coursework.png"
                           alt="bulleted list image"
-                          width="26" height="26"/>
-                        Academic Guidance</h1>
+                          width="30" height="30"/>
+  </div>
   <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
 
       <div id="tabbarcontainer">
@@ -30,15 +31,14 @@
               <!-- ko if: currentTab() === "courseWorkList" && !questionPosted() -->
               <div id="coursework">
 
-                  <div id="accomodationContentContainer" class="flex-bar" style="padding-top: 50px;">
+                  <div id="accomodationContentContainer" class="flex-bar accomodation-content-container">
                       <div class="demo-padding accomodation-dashboard-container oj-flex-bar-start flex-column grow align-stretch">
                           <div style="max-width: 50%; margin-left: 20%;">
                               <academicpostquestion class="flex-column flex-column overflow-hidden grow" ></academicpostquestion>
                           </div>
                           <div id="iframe" style="" class="demo-padding flex-column grow align-stretch">
-                              <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" 
-                              style="overflow: hidden; height: 100%; width: 100%">
-                              </iframe>
+                          <iframe frameborder="0" height="1000" width="100%" scrolling="yes" src="https://public.tableau.com/shared/2BFTH77QT?:display_count=yes&:origin=viz_share_link:embed=yes&:showVizHome=no">
+                          </iframe>
                           </div>
                       </div>
 
@@ -78,9 +78,8 @@
                               <academicpostquestion class="flex-column flex-column overflow-hidden grow" ></academicpostquestion>
                           </div>
                           <div id="iframe" style="" class="demo-padding flex-column grow align-stretch">
-                              <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
-
-                              </iframe>
+                             <iframe frameborder="0" height="1000" width="100%" scrolling="yes" src="https://public.tableau.com/shared/SYQG8P8Y3?:display_count=yes&:origin=viz_share_link:embed=yes&:showVizHome=no">
+                          </iframe>
                           </div>
                       </div>
 

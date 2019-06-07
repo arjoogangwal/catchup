@@ -1,30 +1,30 @@
 
 <div class="oj-hybrid-padding module-content-container">
-    <h1>
+    <div class="flex-bar">
+    <h1 style="padding-right: 10px;">Food & Nightlife</h1>
         <img slot="startIcon"
-                          src="css/images/foodnightlife.jpeg"
+                          src="css/images/food.png"
                           alt="bulleted list image"
-                          width="26" height="26"/>
+                          width="30" height="30"/>
 
-    Food & Nightlife</h1>
+    </div>
     <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
 
         <!-- ko if: !questionPosted() -->
         <div id="coursework">
 
-            <div id="accomodationContentContainer" class="flex-bar" style="padding-top: 50px;">
+            <div id="accomodationContentContainer" class="flex-bar accomodation-content-container">
                 <div class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
                     <div style="max-width: 50%; margin-left: 20%;">
                         <foodnightpostquestion class="flex-column flex-column overflow-hidden grow" ></foodnightpostquestion>
                     </div>
                     <div id="iframe" style="" class="demo-padding flex-column grow align-stretch">
-                        <iframe frameborder="0" src="http://yourserver/zoomdata/visualization/0987654321?__target=embedded&key=1234567890" style="overflow: hidden; height: 100%; width: 100%">
-
-                        </iframe>
+                             <iframe frameborder="0" height="1000" width="100%" scrolling="yes" src="https://public.tableau.com/views/FoodandNightlife/Dashboard1?:embed=y&:display_count=yes&:origin=viz_share_link:embed=yes&:showVizHome=no">
+                          </iframe>
                     </div>
                 </div>
 
-                <div id="contents" style="width:29%; max-width: 29%;" class="demo-padding demo-container flex-column  grow align-stretch">
+                <div id="contents" class="demo-padding demo-container flex-column  grow align-stretch">
 
                     <div id="listviewContainer" class="demo-container">
                         <foodnightdrilldownlist class="flex-column flex-column overflow-hidden grow" ></foodnightdrilldownlist>
@@ -38,7 +38,7 @@
 
         <!-- ko if: questionPosted() -->
 
-        <div id="contents" style="width:29%; max-width: 29%;" class="demo-padding demo-container flex-column  grow align-stretch">
+        <div id="contents" class="demo-padding demo-container flex-column  grow align-stretch">
             <h2 data-bind="text: postedQuestionText"></h2>
 
             <div class="oj-flex-bar">

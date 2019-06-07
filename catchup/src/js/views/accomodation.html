@@ -1,54 +1,82 @@
   <div class="oj-hybrid-padding module-content-container flex-container">
-    <h1>Accommodations</h1>
-    <div id="accomodationContentContainer" class="flex-bar">
-     <div id="iframe" style="" class="demo-padding accomodation-dashboard-container flex-column grow align-stretch">
-    <div class='tableauPlaceholder' id='viz1559246654166' style="max-width:100%">
-    <noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ac&#47;AccomodationNearSCU&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript>
-    <object class='tableauViz'  style='display:none;'>
-      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-      <param name='embed_code_version' value='3' />
-      <param name='site_root' value='' />
-      <param name='name' value='AccomodationNearSCU&#47;Dashboard1' />
-      <param name='tabs' value='no' />
-      <param name='toolbar' value='yes' />
-      <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ac&#47;AccomodationNearSCU&#47;Dashboard1&#47;1.png' />
-      <param name='animate_transition' value='yes' />
-      <param name='display_static_image' value='yes' />
-      <param name='display_spinner' value='yes' />
-      <param name='display_overlay' value='yes' />
-      <param name='display_count' value='yes' />
-   </object>
-</div>          
-<script type='text/javascript'>
-  var divElement = document.getElementById('viz1559246654166');
-  var vizElement = divElement.getElementsByTagName('object')[0];vizElement.style.minWidth='720px';vizElement.style.maxWidth='100%';vizElement.style.width='100%';vizElement.style.minHeight='587px';vizElement.style.maxHeight='887px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';
-  var scriptElement = document.createElement('script');scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-  vizElement.parentNode.insertBefore(scriptElement, vizElement);                
-</script>
-      </div>
+    <div class="flex-bar">
+    <h1 style="padding-right: 10px;">Accommodation</h1>
+        <img slot="startIcon"
+                          src="css/images/house.png"
+                          alt="bulleted list image"
+                          width="30" height="30"/>
+
+    </div>
+    <div id="accomodationContentContainer" class="flex-bar accomodation-content-container">
+     <iframe frameborder="0" height="1000" width="100%" scrolling="yes" src="https://public.tableau.com/views/AccomodationNearSCU/Dashboard1?:embed=y&:display_count=yes&:origin=viz_share_link:embed=yes&:showVizHome=no">
+     </iframe>
       <div id="contents" style="width:32%; max-width: 32%;" class="demo-padding demo-container flex-column  grow align-stretch">
         <oj-button id="iconButton" on-oj-action='[[postButtonClick]]'>
             <span slot='startIcon' class="oj-icon icon-dummy">
           </span>
             POST A NEW LISTING
         </oj-button>
-        <oj-dialog style="display:none" id="modalDialog1" dialog-title="Post a new listing">
+        <oj-dialog style="display:none;width:400px;height:600px;min-width:440px;max-width:450px;" id="modalDialog1" dialog-title="Post a new listing">
               <div slot="body">
-                <div>
-                  <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{postDescription}}">                 
-                  </oj-text-area>
-                </div>
-              <div id="postForm" style="width: 1px; min-width: 100%;">
-                <div class="oj-form" >
-                              <oj-input-text id="location" placeholder="Location" value="{{postLocation}}" style="max-width:49%"></oj-input-text>
-                              <oj-input-text id="zipcode" placeholder="Zipcode" value="{{postZip}}" style="max-width:49%"></oj-input-text>
+                <div class='oj-flex-bar'>
+                     <div class='oj-flex-bar-start'>
+                        <oj-label id="mainlabelid"
+                           class="oj-label-inline">Accommodation Type:</oj-label>
+                     </div>
+                     <div class='oj-flex-bar-middle'>
+                        <oj-radioset labelled-by="mainlabelid" class="oj-choice-direction-row" value="{{type}}">
+                           <oj-option id="looking" value="LOOKING">Looking</oj-option>
+                           <oj-option id="renting" value="RENTING">Renting</oj-option>
+                        </oj-radioset>
+                     </div>
+                  </div>
+                  <div>
+                    <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Description" value="{{description}}">                 
+                    </oj-text-area>
+                  </div>
+                  <div id="postForm" style="width: 1px; min-width: 100%;">
+                    <div class="oj-form" >
+                              <oj-input-text id="address" placeholder="Address" value="{{address}}" style="width:100%; max-width:100%;"></oj-input-text>
+                              <oj-input-text id="city" placeholder="City" value="{{city}}" style="max-width:49%"></oj-input-text>
+                              <oj-input-text id="state" placeholder="State" value="{{state}}" style="max-width:49%"></oj-input-text>
+                              <oj-input-text id="zip" placeholder="Zip" value="{{zip}}" style="max-width:49%"></oj-input-text>
+                              <oj-label for="beds">Beds:</oj-label> 
+                              <oj-input-number id="beds"
+                                    max= "5"
+                                    min= "0"
+                                    step= "1" 
+                                    value="{{bed}}">
+                              </oj-input-number>
+                              <oj-label for="baths">Baths:</oj-label> 
+                              <oj-input-number id="baths"
+                                    max= "5"
+                                    min= "1"
+                                    step= "1" 
+                                    value="{{bath}}">
+                              </oj-input-number>
+                              <oj-label for="occupancy">Occupancy:</oj-label> 
+                              <oj-select-one id="conditionSelect" required="true"
+                                           placeholder="Occupancy" value="{{occupancy}}" 
+                                           style="max-width:15em">
+                                <oj-option value="SINGLE">Single</oj-option>
+                                <oj-option value="SHARED">Shared</oj-option>
+                            </oj-select-one>
                               <oj-label for="price" class="oj-label-inline">$</oj-label>
-                              <oj-input-text id="price" placeholder="Price" value="{{postPrice}}" style="max-width:30%"></oj-input-text>
-                          </div>
-                        </div>
-                      </div>
+                              <oj-input-text id="price" placeholder="Price" value="{{price}}" style="max-width:30%"></oj-input-text>
+                              <oj-label for="conditionSelect">Apartment Type:</oj-label> 
+                              <oj-select-one id="conditionSelect" required="true"
+                                           placeholder="Apartment Type" value="{{apartment_type}}" 
+                                           style="max-width:20em">
+                                <oj-option value="APARTMENT">Apartment</oj-option>
+                                <oj-option value="STUDIO">Studio</oj-option>
+                                <oj-option value="TOWNHOME">Townhome</oj-option>
+                                <oj-option value="CONDO">Condo</oj-option>
+                            </oj-select-one>
+                    </div>
+                  </div>
+              </div>
                 <div slot="footer">
-                    <oj-button id="postButton" on-oj-action="[[closePostDialog]]">POST
+                    <oj-button id="postButton" on-oj-action="[[savePost]]">POST
                     </oj-button>
                     <oj-button id="closePostButton" on-oj-action="[[closePostDialog]]">CANCEL
                     </oj-button>
@@ -57,6 +85,7 @@
 
 
           <div id="page1" class="demo-page">
+            <h4 data-bind="text: 'Accommodation Posts:'"></h4>
             <oj-list-view id="listview" aria-label="drill down list"
                     data="[[dataProvider]]" on-selection-changed="[[gotoContent]]" selection-mode="single">
                     <template slot="itemTemplate">
@@ -68,7 +97,7 @@
                           <div class="oj-lg-10 oj-md-10 oj-sm-12">
                             <div class="oj-flex row">
                                   <div class="oj-lg-4 oj-md-4 oj-sm-12">
-                                      <span class="data"><span><oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text></span></span>
+                                      <span class="data color-brown"><oj-bind-text value="[[$current.data.full_name]]"></oj-bind-text></span>
                                   </div>
                               </div>
                               <div class="oj-flex row">
@@ -137,7 +166,9 @@
                         </div>
                       </template>
         </oj-list-view>
-        <div class="oj-flex-bar" style="padding-top:20px;">
+        <div class="flex-column" style="padding-top:20px;">
+            <oj-text-area style="max-width: 100%;" id="text-area" placeholder="Reply" value="{{replyText}}">                 
+            </oj-text-area>
             <oj-button class='oj-button-sm oj-flex-bar-end' id="buttonIcon2" on-oj-action="[[replyToPost]]">
                 Reply
             </oj-button>
