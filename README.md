@@ -1,25 +1,43 @@
 # catchup
 
-ScuCatchupEngine.py - Flask framework with Rest Apis written in python.
 
-catchup/ - Folder containing the oracle jet build for the frontend of our webapp.
+SQL Dump for MySQL Database: CATCH_UP - catchup/Catch_Up_Dump_final.sql
 
-static/ and templates/ - required by the flask framework.
 
-catchup/catchup/src/css - Folder containing css and images used in our wevapp
+## Python Files: 
 
-catchup/catchup/src/js - Folder containing javascript and html files for the webapp
+1. Python Notebook containing the text mining code - Text mining Final code.ipynb
 
-catchup/catchup/src/index.html - Starting page for our webapp
+2. Python Notebook containing the chatbot code - Chatbot_Jaccard_SQL.ipynb
 
-catchup/catchup/src/js/viewModels/ - All Javascript files
+## Data Files: 
 
-catchup/catchup/src/js/views/ -  All html files
+Json file containing the FAQs from the SCU website- Chatbot_FAQquestions.json
 
-Text mining Final code.ipynb - Python Notebook containing the text mining code
+## Dashboards:
 
-Chatbot_Jaccard_SQL.ipynb - Python Notebook containing the chatbot code
+1. Accomodation Dashboard: https://public.tableau.com/profile/arjoo.gangwal#!/vizhome/AccomodationNearSCU/Dashboard1
 
-Chatbot_FAQquestions.json - Json file containing the FAQs from the SCU website
+2. Food and Nightlife Dashboard: https://public.tableau.com/profile/arjoo.gangwal#!/vizhome/FoodandNightlife/Dashboard1
 
-catchup/Catch_Up_Dump_final.sql - SQL Dump for the Catch_up Database
+3. Coursework Dashboard: https://public.tableau.com/profile/krutikaambavane.da#!/vizhome/CapstoneProject-Quarterwisecourses/CoursesDashboard
+
+4. Hotskills Dashboard: https://public.tableau.com/profile/krutikaambavane.da#!/vizhome/CapstoneProject-ImportantSkillsCourses/HotskillsDashboard
+
+## Front-End (HTML, CSS, JS Files):
+
+1. Flask framework with Rest Apis written in python - *ScuCatchupEngine.py*
+
+2. Folder containing the oracle jet build for the frontend of our webapp - *catchup/*
+
+3. Folders required by the flask framework -  *static/ and templates/*
+
+4. Folder containing css and images used in our webapp - catchup/catchup/src/css
+
+5. Folder containing javascript and html files for the webapp - catchup/catchup/src/js
+
+6. Starting page for our webapp - catchup/catchup/src/index.html
+
+7. Folder containing all Javascript files - catchup/catchup/src/js/viewModels/
+
+8. Folder containing all html files - catchup/catchup/src/js/views/ 
