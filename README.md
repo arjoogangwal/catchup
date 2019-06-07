@@ -20,8 +20,7 @@ Json file containing the FAQs from the SCU website- Chatbot_FAQquestions.json
 
 ## Dashboards:
 
-1. Accomodation Dashboard: 
-![alt text](https://public.tableau.com/profile/arjoo.gangwal#!/vizhome/AccomodationNearSCU/Dashboard1)
+1. Accomodation Dashboard: https://public.tableau.com/profile/arjoo.gangwal#!/vizhome/AccomodationNearSCU/Dashboard1
 
 2. Food and Nightlife Dashboard: https://public.tableau.com/profile/arjoo.gangwal#!/vizhome/FoodandNightlife/Dashboard1
 
