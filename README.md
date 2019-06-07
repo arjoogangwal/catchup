@@ -1,5 +1,6 @@
 # catchup
 
+![alt text] (https://github.com/arjoogangwal/catchup/blob/master/rendered.jpg)
 
 SQL Dump for MySQL Database: CATCH_UP - catchup/Catch_Up_Dump_final.sql
 
